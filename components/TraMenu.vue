@@ -19,10 +19,32 @@
 
         <p v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center">登录/注册</p>
 
-        <div v-if="type==='1'">
-            <p v-if="type==='1'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center">欢迎您！{{this.name}}</p>
-
+        <div v-if="type==='1'" style="float: left;margin-top:-75px;">
+            <!--<p v-if="type==='1'" style="float: right;margin-right:35px;font-size: 15px;text-align: center">欢迎您！{{this.name}}</p>-->
+            <el-menu :default-active="activeIndex"
+                     class="el-menu-demo2"
+                     mode="horizontal"
+                     @select="handleSelect"
+                     text-color="#444555">
+                <el-submenu index="1">
+                    <template slot="title">欢迎您！{{this.name}}</template>
+                    <el-menu-item index="1-1">个人中心</el-menu-item>
+                    <el-menu-item index="1-2" @click="dialogVisible = true">退出</el-menu-item>
+                </el-submenu>
+            </el-menu>
         </div>
+
+        <el-dialog
+                title="提示"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :before-close="handleClose">
+            <span>确定退出登录吗？</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false; type='0'">确 定</el-button>
+            </span>
+        </el-dialog>
 
     </div>
 </template>
@@ -35,7 +57,14 @@
             return{
                 type:'1',
                 name:"Pika",
+                dialogVisible:false,
             }
+        },
+
+        methods:{
+            logout(){
+                this.dialogVisible=true;
+            },
         }
     }
 </script>
@@ -53,6 +82,14 @@
         padding-bottom: 5px;
         margin-left: 300px;
         background: unset;
-        width: 800px;
+        width: 900px;
+    }
+
+    .el-menu-demo2{
+        padding-top: 10px;
+        padding-bottom: 5px;
+        margin-left: 1350px;
+        background: unset;
+        width: 150px;
     }
 </style>
