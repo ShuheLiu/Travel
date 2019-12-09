@@ -2,18 +2,18 @@
     <div class="menuClass">
         <img src="../assets/image/logo.png" style="float: left;height: 55px;margin-top: 12px;margin-left: 20px">
         <p style="float: left;margin-left: 10px;margin-top: 25px;font-size: 20px;text-align: center">景点信息系统</p>
-        <el-menu :default-active="activeIndex"
+        <el-menu :default-active="pageIndex"
                  class="el-menu-demo"
                  mode="horizontal"
                  text-color="#444555"
                  active-text-color="#1f6fb5"
                  @select="handleSelect">
-            <el-menu-item index="1"><i class="el-icon-s-home"></i>首页</el-menu-item>
-            <el-menu-item index="2"><i class="el-icon-s-ticket"></i>在线购票</el-menu-item>
-            <el-menu-item index="3"><i class="el-icon-s-management"></i> 旅游攻略</el-menu-item>
-            <el-menu-item index="4"><i class="el-icon-s-promotion"></i> 跟团游</el-menu-item>
-            <el-menu-item index="5"><i class="el-icon-question"></i> FAQ</el-menu-item>
-            <el-menu-item index="6"><i class="el-icon-info"></i> 关于我们</el-menu-item>
+            <el-menu-item index="1" @click="toHomePage"><i class="el-icon-s-home"></i>首页</el-menu-item>
+            <el-menu-item index="2" @click="toTicket"><i class="el-icon-s-ticket"></i>在线购票</el-menu-item>
+            <el-menu-item index="3" @click="toStrategy"><i class="el-icon-s-management"></i> 旅游攻略</el-menu-item>
+            <el-menu-item index="4" @click="toTrip"><i class="el-icon-s-promotion"></i> 跟团游</el-menu-item>
+            <el-menu-item index="5" @click="toFAQ"><i class="el-icon-question"></i> FAQ</el-menu-item>
+            <el-menu-item index="6" @click="toAboutMe"><i class="el-icon-info"></i> 关于我们</el-menu-item>
             <!--<el-menu-item index="7"><i class="el-icon-user-solid"></i>个人中心</el-menu-item>-->
         </el-menu>
 
@@ -42,7 +42,7 @@
             <span>确定退出登录吗？</span>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false; type='0'">确 定</el-button>
+                <el-button type="primary" @click="logout">确 定</el-button>
             </span>
         </el-dialog>
 
@@ -53,9 +53,15 @@
     export default {
         name: "TraMenu",
 
+        props:{
+            pageIndex: {
+                type: String
+            }
+        },
+
         data(){
             return{
-                type:'1',
+                type:'0',
                 name:"Pika",
                 dialogVisible:false,
             }
@@ -63,8 +69,34 @@
 
         methods:{
             logout(){
-                this.dialogVisible=true;
+                this.dialogVisible=false;
+                this.$router.push({path: `/`});
             },
+
+            toHomePage(){
+                this.$router.push({path: `/`});
+            },
+
+            toTicket(){
+                this.$router.push({path: `/ticket`});
+            },
+
+            toStrategy(){
+                this.$router.push({path: `/strategy`});
+            },
+
+            toTrip(){
+                this.$router.push({path: `/trip`});
+            },
+
+            toFAQ(){
+                this.$router.push({path: `/FAQ`});
+            },
+
+            toAboutMe(){
+                this.$router.push({path: `/aboutMe`});
+            },
+
         }
     }
 </script>
@@ -83,6 +115,7 @@
         margin-left: 300px;
         background: unset;
         width: 900px;
+        z-index: 999;
     }
 
     .el-menu-demo2{
@@ -91,5 +124,6 @@
         margin-left: 1350px;
         background: unset;
         width: 150px;
+        z-index: 999;
     }
 </style>
