@@ -9,7 +9,7 @@
                  active-text-color="#1f6fb5"
                  @select="handleSelect">
             <el-menu-item index="1" @click="toHomePage"><i class="el-icon-s-home"></i>首页</el-menu-item>
-            <el-menu-item index="2" @click="toTicket"><i class="el-icon-s-ticket"></i>在线购票</el-menu-item>
+            <el-menu-item index="2" @click="toTicket"><i class="el-icon-s-ticket"></i>景区信息</el-menu-item>
             <el-menu-item index="3" @click="toStrategy"><i class="el-icon-s-management"></i> 旅游攻略</el-menu-item>
             <el-menu-item index="4" @click="toTrip"><i class="el-icon-s-promotion"></i> 跟团游</el-menu-item>
             <el-menu-item index="5" @click="toFAQ"><i class="el-icon-question"></i> FAQ</el-menu-item>
