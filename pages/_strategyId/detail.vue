@@ -1,7 +1,7 @@
 <template>
     <div>
-        <tra-menu></tra-menu>
-        <strategy-detail :strid="strid" style="width: 100%"></strategy-detail>
+        <tra-menu :pageIndex="pageIndex"></tra-menu>
+        <strategy-detail :strid="strid"></strategy-detail>
         <tra-footer></tra-footer>
     </div>
 </template>
@@ -12,9 +12,10 @@
     import StrategyDetail from "../../components/strategyDetail";
     export default {
         name: "detail",
-        components: {StrategyDetail, ScenicDetail, TraFooter, TraMenu},
+        components: {StrategyDetail, TraFooter, TraMenu},
         data(){
             return{
+                pageIndex:'3',
                 strid:'',
             }
         },
