@@ -21,6 +21,7 @@
     import StrategyList from "../../components/strategy/strategyList";
     import TraFooter from "../../components/TraFooter";
     import Search from "../../components/search";
+    import API from '../../api'
     export default {
         name: "index",
         components: {Search, TraFooter, StrategyList, TraMenu},
@@ -29,49 +30,8 @@
             return{
                 pageIndex:'3',
                 activeName: 'first',
-                strategyList: [{
-                    strid:'0001',
-                    title:'攻略1',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx,xxxxxx,xxxxxxx,xxxxxxx,xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2019-11-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0002',
-                    title:'攻略2',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2018-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0003',
-                    title:'攻略3',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2017-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0004',
-                    title:'攻略4',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2016-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0005',
-                    title:'攻略5',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2013-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0006',
-                    title:'攻略6',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2015-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },],
+                strategyList: [],
+                identity:'1',
 
                 strategyList2: [{
                     title:'攻略a',
@@ -115,7 +75,27 @@
 
         methods:{
             getStrategyList(){
+                let data ={
+                }
+                console.log("hello");
+                API.getStraList(data).then(res => {
+                    console.log("res");
+                    console.log(res);
 
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    console.log("hello2");
+                    console.log(res);
+                    this.strategyList=res.strategyList;
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
             },
 
             getStrategyList2(){
@@ -124,6 +104,7 @@
         },
 
         mounted() {
+            this.getStrategyList();
         },
     }
 </script>
@@ -133,6 +114,7 @@
     .bodyClass{
         display: flow;
         width: 100%;
+        background: rgba(244, 247, 252, 0.82);
         /*background: -webkit-linear-gradient(bottom,rgb(250,255,235),#fffef3,white) no-repeat;*/
     }
 </style>
