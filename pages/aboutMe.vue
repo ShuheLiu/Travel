@@ -12,7 +12,7 @@
                 <el-card class="card">
                     <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
                     <div style="padding: 14px;">
-                        <span>组员-王紫微</span>
+                        <span>组员-王紫微。。。</span>
                         <p>主要工作：前端代码编写</p>
                     </div>
                 </el-card>
