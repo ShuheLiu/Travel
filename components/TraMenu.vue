@@ -9,7 +9,7 @@
                  active-text-color="#1f6fb5"
                  @select="handleSelect">
             <el-menu-item index="1" @click="toHomePage"><i class="el-icon-s-home"></i>首页</el-menu-item>
-            <el-menu-item index="2" @click="toTicket"><i class="el-icon-s-ticket"></i>景区信息</el-menu-item>
+            <el-menu-item index="2" @click="toScenic"><i class="el-icon-s-ticket"></i>景区信息</el-menu-item>
             <el-menu-item index="3" @click="toStrategy"><i class="el-icon-s-management"></i> 旅游攻略</el-menu-item>
             <el-menu-item index="4" @click="toTrip"><i class="el-icon-s-promotion"></i> 跟团游</el-menu-item>
             <el-menu-item index="5" @click="toFAQ"><i class="el-icon-question"></i> FAQ</el-menu-item>
@@ -29,7 +29,9 @@
                 <el-submenu index="1">
                     <template slot="title">欢迎您！{{this.name}}</template>
                     <el-menu-item index="1-1">个人中心</el-menu-item>
-                    <el-menu-item index="1-2" @click="dialogVisible = true">退出</el-menu-item>
+                    <el-menu-item index="1-2">我的收藏</el-menu-item>
+                    <el-menu-item index="1-3">我的订单</el-menu-item>
+                    <el-menu-item index="1-4" @click="dialogVisible = true">退出</el-menu-item>
                 </el-submenu>
             </el-menu>
         </div>
@@ -61,7 +63,7 @@
 
         data(){
             return{
-                type:'0',
+                type:'1',
                 name:"Pika",
                 dialogVisible:false,
             }
@@ -77,8 +79,8 @@
                 this.$router.push({path: `/`});
             },
 
-            toTicket(){
-                this.$router.push({path: `/ticket`});
+            toScenic(){
+                this.$router.push({path: `/scenic`});
             },
 
             toStrategy(){

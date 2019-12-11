@@ -52,7 +52,7 @@
 
         methods:{
             toDetail(item){
-                this.$router.push({path: `/`+item.strid+`/detail`})
+                this.$router.push({path: `/strategy/`+item.strid+`/detail`})
             },
         }
     }

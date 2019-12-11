@@ -17,12 +17,12 @@
 </template>
 
 <script>
-    import TraMenu from "../components/TraMenu";
-    import StrategyList from "../components/strategyList";
-    import TraFooter from "../components/TraFooter";
-    import Search from "../components/search";
+    import TraMenu from "../../components/TraMenu";
+    import StrategyList from "../../components/strategy/strategyList";
+    import TraFooter from "../../components/TraFooter";
+    import Search from "../../components/search";
     export default {
-        name: "strategy",
+        name: "index",
         components: {Search, TraFooter, StrategyList, TraMenu},
 
         data(){

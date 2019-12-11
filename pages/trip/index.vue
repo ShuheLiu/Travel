@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    import TraMenu from "../components/TraMenu";
+    import TraMenu from "../../components/TraMenu";
     export default {
-        name: "trip",
+        name: "index",
         components: {TraMenu},
 
         data(){
