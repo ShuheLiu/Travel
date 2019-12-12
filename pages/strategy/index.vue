@@ -115,7 +115,22 @@
 
         methods:{
             getStrategyList(){
-
+                let data ={
+                }
+                API.getStraList(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    console.log("res="+res);
+                    //this.strategyList=res.strategyList;
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
             },
 
             getStrategyList2(){
@@ -124,6 +139,7 @@
         },
 
         mounted() {
+            this.getStrategyList();
         },
     }
 </script>
