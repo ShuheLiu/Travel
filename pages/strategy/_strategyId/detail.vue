@@ -2,8 +2,8 @@
     <div style="background: rgba(244, 247, 252, 0.82);">
         <tra-menu :pageIndex="pageIndex"></tra-menu>
         <div class="bodyClass">
-                <strategy-detail :strid="strid" style="width: 60%;margin-left: 10%;display: inline-block"></strategy-detail>
-                <recommended style="width: 20%;display: inline-block;float: right;margin-right: 120px"></recommended>
+                <strategy-detail :strid="strid" style="width: 50%;margin-left: 18%;display: inline-block"></strategy-detail>
+                <recommended style="width: 20%;display: inline-block;float: right;margin-right: 140px"></recommended>
         </div>
         <tra-footer></tra-footer>
     </div>

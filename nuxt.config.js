@@ -14,6 +14,20 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/logo.png' }
     ]
   },
+
+  /*modules: [
+    ['@nuxtjs/axios',"@nuxtjs/proxy"]
+  ],
+
+  proxy: {
+    '/api': {
+      target: 'http://127.0.0.1:8082/',
+      pathRewrite: {'^/api' : ''},
+      changeOrigin: true,     // target是域名的话，需要这个参数，
+      secure: false,          // 设置支持https协议的代理
+    },
+  },*/
+
   /*
   ** Customize the progress bar color
   */
@@ -58,7 +72,7 @@ module.exports = {
   plugins: [
     { src: '~plugins/element-ui.js' },
     { src: '~plugins/quill-plugins.js',ssr:false},
-    {src: '~plugins/lodash.js', ssr: false}
+    {src: '~plugins/lodash.js', ssr: false},
   ]
 }
 

@@ -3,7 +3,7 @@
         <tra-menu :pageIndex="pageIndex"></tra-menu>
         <div>
             <search></search>
-            <el-tabs style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 575px;margin-top: 10px" v-model="activeName" @tab-click="handleClick">
+            <el-tabs style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 575px;margin-top: 10px" v-model="activeName">
                 <el-tab-pane label="按时间" name="first">
                     <strategy-list :strategyList="strategyList"></strategy-list>
                 </el-tab-pane>
@@ -77,18 +77,13 @@
             getStrategyList(){
                 let data ={
                 }
-                console.log("hello");
                 API.getStraList(data).then(res => {
-                    console.log("res");
-                    console.log(res);
-
                     if(res.code){
                         alert(res.message);
                         return;
                     }
-                    console.log("hello2");
-                    console.log(res);
-                    this.strategyList=res.strategyList;
+                    console.log("res="+res);
+                    //this.strategyList=res.strategyList;
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);

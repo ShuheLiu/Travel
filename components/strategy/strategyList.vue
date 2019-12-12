@@ -78,14 +78,4 @@
         margin-bottom: 5px;
         margin-right: 5px;
     }
-
-    /*.clearfix:before,
-    .clearfix:after {
-        display: table;
-        content: "";
-    }
-
-    .clearfix:after {
-        clear: both
-    }*/
 </style>
