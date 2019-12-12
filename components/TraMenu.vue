@@ -66,10 +66,14 @@
                 type:'1',
                 name:"Pika",
                 dialogVisible:false,
+                activeIndex:'',
             }
         },
 
         methods:{
+            handleSelect(){
+
+            },
             logout(){
                 this.dialogVisible=false;
                 this.$router.push({path: `/`});

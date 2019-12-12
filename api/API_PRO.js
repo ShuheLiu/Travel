@@ -1,6 +1,6 @@
 export default {
 
-    baseURL: 'http://172.24.37.166:8082',
+    baseURL: 'http://192.168.43.182:8082',
 
     method: 'post',
 

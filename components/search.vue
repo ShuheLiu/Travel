@@ -5,7 +5,6 @@
                   placeholder="请输入内容"
                   prefix-icon="el-icon-search"
                   class="inputClass"
-                  clearable="true"
         >
         </el-input>
         <el-button type="primary"  class="inputButton">搜索</el-button>
