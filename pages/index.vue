@@ -108,6 +108,7 @@
   .bodyClass{
     width: 100%;
     min-height: 650px;
+    background: rgba(244, 247, 252, 0.82);
   }
 
   .caro{
