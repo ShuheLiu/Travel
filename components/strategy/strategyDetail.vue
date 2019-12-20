@@ -1,23 +1,22 @@
 <template>
     <el-card class="card">
-            <el-button style="float: right;background: #ffbd4a" v-if="this.isCollected==='0'" @click="collect">
-                收藏<i class="el-icon-star-off" style="margin-left: 5px"></i>
-            </el-button>
-            <el-button style="float: right;background: #eeeeee" v-if="this.isCollected==='1'" @click="uncollect">
-                已收藏<i class="el-icon-star-on" style="margin-left: 5px"></i>
-            </el-button>
+        <el-button style="float: right;background: #ffbd4a" v-if="this.isCollected==='0'" @click="collect">
+            收藏<i class="el-icon-star-off" style="margin-left: 5px"></i>
+        </el-button>
+        <el-button style="float: right;background: #eeeeee" v-if="this.isCollected==='1'" @click="uncollect">
+            已收藏<i class="el-icon-star-on" style="margin-left: 5px"></i>
+        </el-button>
 
         <h1 style="margin-left: 30px">{{this.title}}</h1>
         <div style="margin-top: 20px;margin-bottom: 20px;margin-left: 30px">
-                <span style="color: #dd6161">
-                    <i class="el-icon-s-custom"></i>作者：
+            <span style="color: #dd6161">
+                <i class="el-icon-s-custom"></i>作者：
+            </span>
+            {{this.author}}
+            <span style="margin-left: 50px;color: #1f6fb5">
+                <i class="el-icon-date"></i>发布时间:
                 </span>
-                {{this.author}}
-                <span style="margin-left: 50px;color: #1f6fb5">
-                    <i class="el-icon-date"></i>发布时间:
-                </span>
-
-                <span style="color: #7F828B">{{this.time}}</span>
+            <span style="color: #7F828B">{{this.time}}</span>
         </div>
         <div style="margin-left: 30px;margin-bottom: 20px">
             景区关键词：{{this.keyword}}
@@ -26,6 +25,12 @@
             <p style="font-size: 20px;color: green">攻略详情：</p>
             <p style="word-break:break-word;line-height: 20px;font-size: 18px">{{this.content}}</p>
         </div>
+
+        <div style="margin-top: 40px">
+            <el-button size="small" style="background-color: #dd6161;color: white;float: right;" circle>赞</el-button>
+            <el-button size="small" style="background-color: #ffbd4a;color: white;float: right;margin-right: 15px" icon="el-icon-star-off" circle></el-button>
+        </div>
+
     </el-card>
 </template>
 
