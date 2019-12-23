@@ -63,7 +63,7 @@
 
         data(){
             return{
-                type:'1',
+                type:'0',
                 name:"Pika",
                 dialogVisible:false,
                 activeIndex:'',

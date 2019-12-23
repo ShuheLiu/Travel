@@ -34,42 +34,7 @@
 
         data(){
             return{
-                strategyList: [{
-                    strid:'0021',
-                    title:'攻略1',
-                    content:'你好啊你好啊你好啊，哈哈哈哈哈哈哈哈哈哈哈',
-                    time:'2019-11-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0011',
-                    title:'攻略1',
-                    content:'哈哈哈哈哈哈哈哈哈哈哈',
-                    time:'2019-11-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0008',
-                    title:'攻略1',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx,xxxxxx,xxxxxxx,xxxxxxx,xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2019-11-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0009',
-                    title:'攻略1',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx,xxxxxx,xxxxxxx,xxxxxxx,xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2019-11-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0010',
-                    title:'攻略1',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx,xxxxxx,xxxxxxx,xxxxxxx,xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2019-11-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                }],
+                strategyList: [],
             }
         },
 

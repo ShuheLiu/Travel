@@ -22,7 +22,56 @@
             <p style="font-size: 20px;color: green">景区详情：</p>
             <p style="word-break:break-word;line-height: 20px;font-size: 18px">{{this.introduction}}</p>
         </div>
-        <el-button style="float: right;margin-top: 20px;margin-right: 30px">我要购票</el-button>
+        <el-button style="float: right;margin-top: 20px;margin-right: 30px;background-color: #accfff;color: black" @click="ticketListVisible=true">我要购票</el-button>
+
+        <el-dialog title="票种列表" :visible.sync="ticketListVisible">
+            <div style="display: table; width: 100%; padding-left: 10px; padding-top: 20px; padding-bottom:15px; padding-right: 10px">
+                <div style="display: table-row">
+                    <div class="tableTitle">
+                    </div>
+                    <div class="tableTitle">
+                        票种名称
+                    </div>
+                    <div class="tableTitle">
+                        包含景点
+                    </div>
+                    <div class="tableTitle">
+                        价格
+                    </div>
+                    <div class="tableTitle">
+                    </div>
+                </div>
+                <div :class="{'tablerow':true, 'grayLine': (index % 2 === 0)}" style="display: table-row;" v-for="(item,index) in ticketList" :key="item.index">
+                    <div class="tableCell">
+                        {{index+1}}
+                    </div>
+                    <div class="tableCell">
+                        {{item.tname}}
+                    </div>
+                    <div class="tableCell">
+                        {{item.scenicinfo}}
+                    </div>
+                    <div class="tableCell">
+                        {{item.price}}
+                    </div>
+                    <div class="tableCell" style="max-width: 50px">
+                        <el-button size="mini" @click="sureBuying(item)">购买</el-button>
+                    </div>
+                </div>
+            </div>
+        </el-dialog>
+
+        <el-dialog
+                title="提示"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :before-close="handleClose">
+            <span>确定购买{{this.ticketName}}吗？</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="buyTicket">确 定</el-button>
+            </span>
+        </el-dialog>
 
     </el-card>
 </template>
@@ -37,12 +86,32 @@
 
         data(){
             return{
+                ticketListVisible:false,
+                sureBuyingVisible:false,
+                ticketName:'',
                 sname:'故宫',
                 cname:'所属公司',
                 province:'北京',
                 city:'北京',
                 phone:'12345678910',
                 introduction:"xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx",
+                ticketList:[{
+                    tname:'门票1',
+                    scenicinfo:'故宫',
+                    price:50,
+                },{
+                    tname:'门票2',
+                    scenicinfo:'故宫 颐和园',
+                    price:100,
+                },{
+                    tname:'门票3',
+                    scenicinfo:'故宫 颐和园 景山',
+                    price:150,
+                },{
+                    tname:'门票3',
+                    scenicinfo:'故宫 颐和园 景山',
+                    price:150,
+                },],
             }
         },
 
@@ -72,6 +141,15 @@
                 })
 
             },
+
+            sureBuying(item){
+                this.sureBuyingVisible=true;
+                this.ticketName=item.tname;
+            },
+
+            buyTicket(){
+
+            },
         },
 
         mounted() {
@@ -91,5 +169,24 @@
         min-height: 560px;
         padding: 10px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+    }
+
+    .tableTitle{
+        display: table-cell;
+        font-size: 15px;
+        padding: 5px;
+        font-family: 黑体;
+        font-weight: bold;
+
+    }
+    .tableCell{
+        display: table-cell;
+        font-size: 15px;
+        padding: 5px;
+    }
+
+
+    .grayLine{
+        background-color: #e4efff;
     }
 </style>

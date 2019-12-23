@@ -2,7 +2,7 @@
     <div>
     <el-card>
         <p style="margin-left: 10px;margin-bottom: 15px;font-size: 35px;font-weight: 600;float: left">景区评论</p>
-        <el-button style="float: right;margin-top: 10px;margin-right: 10px" icon="el-icon-edit" @click="writeComment=true">写评论</el-button>
+        <el-button style="float: right;margin-top: 10px;margin-right: 10px;background-color: #accfff;color: black" icon="el-icon-edit" @click="writeComment=true">写评论</el-button>
         <el-row style="pointer-events: none;">
             <el-col style="margin-bottom: 10px"  v-if="commentList.length > 0" v-for="(item) in commentList" :key="item.id">
                 <el-card :body-style="{ padding: '10px'}">
@@ -18,12 +18,15 @@
         </el-row>
     </el-card>
 
-        <el-dialog title="收货地址" :visible.sync="writeComment">
+        <el-dialog title="评论" :visible.sync="writeComment">
             <el-form :model="form">
+                <el-form-item label="撰写评论（450字以内）">
+                    <el-input type="textarea" v-model="form.content"></el-input>
+                </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                <el-button @click="writeComment = false">取 消</el-button>
+                <el-button type="primary" @click="submitComment">提交</el-button>
             </div>
         </el-dialog>
     </div>
@@ -31,21 +34,30 @@
 </template>
 
 <script>
+    import API from '../../api'
+    import Cookies from 'js-cookie'
     export default {
         name: "comment",
 
         data(){
             return{
+                identity:Cookies.get('identity'),
                 writeComment:false,
+                form:{
+                    content:'',
+                },
                 commentList:[{
+                    sid:'',
                     vname:'用户1',
                     time:'1234-11-11',
                     content:'这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜',
                 },{
+                    sid:'',
                     vname:'用户2',
                     time:'1234-11-11',
                     content:'这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜',
                 },{
+                    sid:'',
                     vname:'用户3',
                     time:'1234-11-11',
                     content:'这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜这是一个这是一个哈哈哈哈哈哈的哇呜呜呜呜',
@@ -74,7 +86,27 @@
         },
 
         methods:{
-
+            submitComment(){
+                let data ={
+                    identity:this.identity,
+                    sid:this.commentList[0].sid,
+                    content:this.form.content,
+                }
+                API.writeSceComment(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert("提交成功")
+                    this.writeComment=false;
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
+            }
         },
     }
 </script>
@@ -86,9 +118,4 @@
         color: #999;
         float: right;
     }
-
-    /*.time p{
-        float: right;
-        margin-left: 20px;
-    }*/
 </style>

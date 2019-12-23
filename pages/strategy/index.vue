@@ -9,7 +9,7 @@
             <search></search>
             <el-tabs style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 515px;margin-top: 10px" v-model="activeName">
                 <el-tab-pane label="按时间" name="first">
-                    <strategy-list :strategyList="strategyList2"></strategy-list>
+                    <strategy-list :strategyList="strategyList"></strategy-list>
                 </el-tab-pane>
                 <el-tab-pane label="按收藏" name="second">
                     <strategy-list :strategyList="strategyList2"></strategy-list>
@@ -93,7 +93,8 @@
                         alert(res.message);
                         return;
                     }
-                    this.strategyList=res.strategyList;
+                    this.strategyList=res;
+                    console.log(this.strategyList);
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -127,7 +128,7 @@
         },
 
         mounted() {
-            //this.getStrategyList();
+            this.getStrategyList();
             //this.getStrategyList2();
         },
     }

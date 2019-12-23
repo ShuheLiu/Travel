@@ -1,12 +1,12 @@
 export default {
 
-    baseURL: 'http://127.0.0.1:8082',
+    baseURL: 'http://192.168.43.19:8080/',
 
     method: 'post',
 
     //旅游攻略模块接口
-    getStraList:{url:'account/strategy'},
-    getStraDetail:{},
+    getStraList:{url:'index/strategy/index/time'},
+    getStraDetail:{url:'index/strategy/detail'},
     getcollStraList:{},
     getMyCollStraList:{},
     collStra:{},
@@ -16,6 +16,7 @@ export default {
     getSceList:{},
     getSceDetail:{},
     getSceComment:{},
+    writeSceComment:{},
 
     //旅游线路模块接口
     getTripList:{},
