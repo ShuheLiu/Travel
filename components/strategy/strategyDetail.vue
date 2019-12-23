@@ -35,6 +35,7 @@
 </template>
 
 <script>
+    import API from '../../api'
     export default {
         name: "strategyDetail",
         props:{
@@ -76,11 +77,11 @@
             },
 
             collect(){
-                /*let data ={
+                let data ={
                     identity: this.identity,
                     strid : this.strid
                 }
-                API.getStraDetail(data).then(res => {
+                API.collStra(data).then(res => {
                     if(res.code){
                         alert(res.message);
                         return;
@@ -91,17 +92,35 @@
                         return;
                     }
                     alert(msg)
-                })*/
-
+                })
                 this.isCollected='1';
             },
 
             uncollect(){
-
+                let data ={
+                    identity: this.identity,
+                    strid : this.strid
+                }
+                API.uncollStra(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
                 this.isCollected='0';
             }
 
         },
+
+        mounted() {
+            //this.getStrategyDetail();
+        }
 
     }
 </script>
