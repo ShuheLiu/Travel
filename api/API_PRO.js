@@ -5,7 +5,9 @@ export default {
     method: 'post',
 
     //登录模块接口
-    setAccount:{url:'register/vistor'},
+    setAccount:{url:'register/visitor'},
+    setAgency:{url:'register/travelagency'},
+    setCompany:{url:'register/company'},
     isSuccess:{},
     settingCode:{},
 

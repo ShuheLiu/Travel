@@ -1,14 +1,16 @@
 <template>
     <div>
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
+
         <el-container>
             <el-header>Header</el-header>
+            <tra-menu :pageIndex="pageIndex"></tra-menu>
             <el-container>
                 <el-aside width="200px">Aside</el-aside>
                 <el-main>Main</el-main>
+                <p>This is agency page</p>
             </el-container>
         </el-container>
-        <p>This is agency page</p>
+
         <tra-footer style="position:absolute;"></tra-footer>
     </div>
 </template>
