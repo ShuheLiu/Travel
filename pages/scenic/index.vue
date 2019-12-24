@@ -3,7 +3,7 @@
         <tra-menu :page-index="pageIndex"></tra-menu>
         <div>
             <search></search>
-            <scenic-list :scenicList="scenicList2" style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 505px;margin-top: 20px"></scenic-list>
+            <scenic-list :scenicList="scenicList" style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 505px;margin-top: 20px"></scenic-list>
         </div>
 
         <tra-footer></tra-footer>
@@ -15,6 +15,7 @@
     import TraFooter from "../../components/TraFooter";
     import ScenicList from "../../components/sceinc/scenicList";
     import Search from "../../components/search";
+    import API from '../../api'
     export default {
         name: "index",
         components: {Search, ScenicList, TraFooter, TraMenu},
@@ -22,6 +23,7 @@
         data(){
             return{
                 pageIndex:'2',
+                scenicList:[],
 
                 scenicList2: [{
                     sid:'11111',
@@ -74,6 +76,31 @@
                     worktime:'10:00-18:00',
                 },],
             }
+        },
+
+        methods:{
+            getScenicList(){
+                let data ={
+                }
+                API.getSceList(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    this.scenicList=res;
+                    console.log(this.scenicList);
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
+            },
+        },
+
+        mounted() {
+            this.getScenicList();
         }
     }
 </script>

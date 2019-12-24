@@ -28,8 +28,8 @@
                      text-color="#444555">
                 <el-submenu index="1">
                     <template slot="title">欢迎您！{{this.name}}</template>
-                    <el-menu-item index="1-1">个人中心</el-menu-item>
-                    <el-menu-item index="1-2">我的收藏</el-menu-item>
+                    <el-menu-item index="1-1" @click="toMySelf">个人中心</el-menu-item>
+                    <el-menu-item index="1-2" @click="toMyCollect">我的收藏</el-menu-item>
                     <el-menu-item index="1-3">我的订单</el-menu-item>
                     <el-menu-item index="1-4" @click="dialogVisible = true">退出</el-menu-item>
                 </el-submenu>
@@ -110,6 +110,14 @@
 
             toAboutMe(){
                 this.$router.push({path: `/aboutMe`});
+            },
+
+            toMyCollect(){
+                this.$router.push({path: `/self/myCollection`});
+            },
+
+            toMySelf(){
+                this.$router.push({path: `/self/selfSetting`});
             },
 
         }

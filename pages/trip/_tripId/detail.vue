@@ -2,7 +2,7 @@
     <div class="bodyClass">
         <tra-menu :pageIndex="pageIndex"></tra-menu>
         <trip-detail :tripid="this.tripid" style="width: 60%;margin-left: 20%;display: inline-block;margin-top: 20px;margin-bottom: 15px"></trip-detail>
-        <lagency-comment :traid="this.traid" style="width: 60%;margin-left: 20%;margin-top: 10px;margin-bottom: 20px"></lagency-comment>
+        <lagency-comment :tripid="this.tripid" style="width: 60%;margin-left: 20%;margin-top: 10px;margin-bottom: 20px"></lagency-comment>
         <el-backtop style="margin-bottom: 75px">
         </el-backtop>
         <tra-footer></tra-footer>
@@ -20,13 +20,14 @@
         data(){
             return{
                 pageIndex:'4',
-                tripid:'',
+                tripid:1,
             }
         },
 
         mounted() {
-            this.tripid = this.$route.params.tripid;
-            this.traid = this.$route.params.traid;
+            this.tripid = this.$route.params.tripId;
+            console.log(this.tripid)
+            //this.traid = this.$route.params.traid;
         },
     }
 </script>

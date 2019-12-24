@@ -5,10 +5,10 @@
                 <el-card :body-style="{ padding: '0px'}">
                     <div style="padding: 14px;">
                                 <span style="font-size: 20px;margin-left: 5px">
-                                    {{item.route}}</span>
+                                    {{item.name}}</span>
                         <div style="display: flow;margin-bottom: 10px;padding: 10px 10px 10px 5px">
                             <div class="time">
-                                所属旅行社：{{item.traname}}
+                                行程内容：{{item.route}}
                             </div>
                             <el-button type="text" class="button" @click="toTripDetail(item)">详情</el-button>
                         </div>

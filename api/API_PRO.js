@@ -7,25 +7,27 @@ export default {
     //旅游攻略模块接口
     getStraList:{url:'index/strategy/index/time'},
     getStraDetail:{url:'index/strategy/detail'},
-    getcollStraList:{},
-    getMyCollStraList:{},
+    getcollStraList:{url:'index/strategy/index/collect'},
+    getMyCollStraList:{url:'index/strategy/index/collect'},
     collStra:{},
     uncollStra:{},
     newStrategy:{},
 
     //景区模块接口
-    getSceList:{},
-    getSceDetail:{},
-    getSceComment:{},
+    getSceList:{url:'index/scenic/index'},
+    getSceDetail:{url:'index/scenic/detail'},
+    getSceComment:{url:'index/scenic/comment'},
     writeSceComment:{},
-    getTicket:{},
+    getTicket:{url:'index/ticket/searchbykeyword'},
     buySceTicket:{},
 
     //旅游线路模块接口
-    getTripList:{},
-    getTripDetail:{},
+    getTripList:{url:'index/trip/index'},
+    getTripDetail:{url:'index/trip/detail'},
     attendThisTrip:{},
-    getTraCommentList:{},
+    getTraCommentList:{url:'index/trip/travelagencycomments'},
 
+    //我的
+    getMyMessage:{}
 
 }

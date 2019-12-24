@@ -39,49 +39,7 @@
                 identity:'1',
                 /*identity:Cookies.get('identity'),*/
 
-                strategyList2: [{
-                    strid:'0010',
-                    title:'攻略a',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2018-11-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0011',
-                    title:'攻略b',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2016-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0012',
-                    title:'攻略c',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2019-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0013',
-                    title:'攻略d',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2013-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0014',
-                    title:'攻略e',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2013-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0015',
-                    title:'攻略f',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2013-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },],
+                strategyList2: [],
             }
         },
 
@@ -108,12 +66,12 @@
             getStrategyList2(){
                 let data ={
                 }
-                API.getCollStraList(data).then(res => {
+                API.getcollStraList(data).then(res => {
                     if(res.code){
                         alert(res.message);
                         return;
                     }
-                    this.strategyList2=res.strategyList;
+                    this.strategyList2=res;
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -134,7 +92,7 @@
 
         mounted() {
             this.getStrategyList();
-            //this.getStrategyList2();
+            this.getStrategyList2();
         },
     }
 </script>

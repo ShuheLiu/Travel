@@ -2,7 +2,7 @@
     <div style="background: rgba(244, 247, 252, 0.82);">
         <tra-menu :pageIndex="pageIndex"></tra-menu>
         <div class="bodyClass">
-                <strategy-detail :strid="strid" style="width: 50%;margin-left: 18%;display: inline-block"></strategy-detail>
+                <strategy-detail :strid="strid" style="width: 50%;margin-left: 18%;display: inline-block" v-if="isShow"></strategy-detail>
                 <recommended style="width: 20%;display: inline-block;float: right;margin-right: 140px"></recommended>
         </div>
         <tra-footer></tra-footer>
@@ -20,12 +20,14 @@
         data(){
             return{
                 pageIndex:'3',
-                strid:'',
+                strid:3,
+                isShow:false,
             }
         },
 
         mounted(){
-            this.strid = this.$route.params.strid;
+            this.strid = this.$route.params.strategyId;
+            this.isShow=true;
         },
 
 

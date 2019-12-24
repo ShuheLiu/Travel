@@ -7,7 +7,7 @@
             <el-col style="margin-bottom: 10px"  v-if="commentList.length > 0" v-for="(item) in commentList" :key="item.id">
                 <el-card :body-style="{ padding: '10px'}">
                         <div style="display: flow;margin-bottom: 10px;padding: 10px 10px 10px 5px">
-                            <i class="el-icon-s-custom" style="margin-left: 10px;margin-right: 5px;color: #995c53"></i>{{item.vname}}
+                            <i class="el-icon-s-custom" style="margin-left: 10px;margin-right: 5px;color: #995c53"></i>{{item.nickname}}
                             <p style="margin-left: 7px;margin-top: 5px;">{{item.content}}</p>
                             <div class="time">
                                 撰写时间：{{item.time}}
@@ -40,7 +40,7 @@
         name: "comment",
 
         props:{
-            sid:'',
+            sid:Number,
         },
 
         data(){
@@ -133,6 +133,7 @@
         },
 
         mounted() {
+            this.setCommentList();
             //this.submitComment();
         }
     }
