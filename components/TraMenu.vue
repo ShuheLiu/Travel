@@ -17,7 +17,27 @@
             <!--<el-menu-item index="7"><i class="el-icon-user-solid"></i>个人中心</el-menu-item>-->
         </el-menu>
 
-        <p v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center">登录/注册</p>
+        <div v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center">登录/注册
+            <el-dialog
+                title="登录"
+                :visible.sync="centerDialogVisible"
+                width="30%"
+                center>
+             <span slot="footer" class="dialog-footer">
+                 用户名：
+            <el-input
+              placeholder="请输入手机号或邮箱"
+              v-model="input"
+              clearable>
+              </el-input>
+             密码：
+             <el-input placeholder="请输入密码" v-model="input" show-password></el-input>
+
+             <el-button @click="centerDialogVisible = false">取 消</el-button>
+             <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+            </span>
+              </el-dialog>
+        </div>
 
         <div v-if="type==='1'" style="float: left;margin-top:-75px;">
             <!--<p v-if="type==='1'" style="float: right;margin-right:35px;font-size: 15px;text-align: center">欢迎您！{{this.name}}</p>-->
@@ -63,7 +83,7 @@
 
         data(){
             return{
-                type:'1',
+                type:'0',
                 name:"Pika",
                 dialogVisible:false,
                 activeIndex:'',
