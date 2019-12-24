@@ -1,6 +1,6 @@
 <template>
     <div style="background: rgba(244, 247, 252, 0.82);">
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
         <div class="bodyClass">
                 <strategy-detail :strid="strid" style="width: 50%;margin-left: 18%;display: inline-block" v-if="isShow"></strategy-detail>
                 <recommended style="width: 20%;display: inline-block;float: right;margin-right: 140px"></recommended>
@@ -14,6 +14,7 @@
     import TraFooter from "../../../components/TraFooter";
     import StrategyDetail from "../../../components/strategy/strategyDetail";
     import Recommended from "../../../components/recommended";
+    import Cookies from 'js-cookie';
     export default {
         name: "detail",
         components: {Recommended, StrategyDetail, TraFooter, TraMenu},
@@ -22,6 +23,8 @@
                 pageIndex:'3',
                 strid:3,
                 isShow:false,
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
             }
         },
 

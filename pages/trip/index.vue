@@ -1,6 +1,6 @@
 <template>
     <div class="bodyClass">
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
         <search></search>
         <trip-list :tripList="tripList" style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 565px;margin-top: 20px"></trip-list>
         <tra-footer></tra-footer>
@@ -12,7 +12,8 @@
     import TraFooter from "../../components/TraFooter";
     import TripList from "../../components/trip/tripList";
     import Search from "../../components/search";
-    import API from '../../api'
+    import API from '../../api';
+    import Cookies from 'js-cookie';
     export default {
         name: "index",
         components: {Search, TripList, TraFooter, TraMenu},
@@ -21,6 +22,8 @@
             return{
                 pageIndex:'4',
                 tripList:[],
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
             }
         },
 

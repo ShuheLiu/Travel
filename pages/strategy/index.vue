@@ -1,8 +1,8 @@
 <template>
     <div class="bodyClass">
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
-        <div style="position: fixed;margin-top: 50px;width: 100px;float: right">
-            <el-button @click="toNewStrategy">New Strategy</el-button>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
+        <div style="position: fixed;margin-top: 50px;width: 120px;background-color: #462680;cursor:pointer;border-radius: 0 16px 16px 0" @click="toNewStrategy">
+            <p style="color: white;line-height: 40px;float: right;margin-right: 12px">New Strategy</p>
         </div>
 
         <div>
@@ -26,7 +26,8 @@
     import StrategyList from "../../components/strategy/strategyList";
     import TraFooter from "../../components/TraFooter";
     import Search from "../../components/search";
-    import API from '../../api'
+    import API from '../../api';
+    import Cookies from 'js-cookie';
     export default {
         name: "index",
         components: {Search, TraFooter, StrategyList, TraMenu},
@@ -35,9 +36,9 @@
             return{
                 pageIndex:'3',
                 activeName: 'first',
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
                 strategyList: [],
-                identity:'1',
-
                 strategyList2: [],
             }
         },

@@ -1,6 +1,6 @@
 <template>
     <div class="bodyClass">
-        <tra-menu :page-index="pageIndex"></tra-menu>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
         <el-button type="text" style="margin-left: 13%;margin-top: 10px;font-size: 15px" @click="clickBack">{{this.pos}}</el-button>
         <el-card style="width: 70%;margin-left: 15%;margin-top: 6px;margin-bottom: 20px;padding: 10px" class="cardClass">
             <h2 style="margin-bottom: 10px">新增攻略</h2>
@@ -40,7 +40,6 @@
         components: {TraFooter, TraMenu},
         data(){
             return{
-                identity:Cookies.get('identity'),
                 pos:"<< 返回",
                 pageIndex:'3',
                 newStra:{
@@ -49,6 +48,8 @@
                     content:'',
                 },
                 labelPosition: 'top',
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
             }
         },
 
@@ -59,7 +60,8 @@
 
             submitStra(){
                 let data={
-                    identity:this.identity,
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
                     title:this.newStra.title,
                     keyword:this.newStra.keyword,
                     content:this.newStra.content,

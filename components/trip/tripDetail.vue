@@ -74,7 +74,8 @@
             attendTrip(){
                 let data={
                     tripid:this.tripid,
-                    //identity:Cookies.get('identity'),
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
                 }
 
                 API.attendThisTrip(data).then(res => {

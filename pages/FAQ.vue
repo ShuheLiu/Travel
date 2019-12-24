@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
         <div class="bodyClass">
             <el-collapse style="width: 90%;margin-left: 5%;margin-top: 30px"
                          v-model="activeNames"
@@ -46,6 +46,7 @@
 <script>
     import TraMenu from "../components/TraMenu";
     import TraFooter from "../components/TraFooter";
+    import Cookies from 'js-cookie';
     export default {
         name: "FAQ",
         components: {TraFooter, TraMenu},
@@ -53,6 +54,8 @@
             return {
                 activeNames: [],
                 pageIndex:'5',
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
             };
         },
         methods: {

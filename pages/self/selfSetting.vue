@@ -1,6 +1,6 @@
 <template>
     <div class="bodyClass">
-        <tra-menu></tra-menu>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
         <p style="font-size: 25px;margin-left: 20%;margin-top: 15px">个人中心</p>
             <el-tabs type="border-card" style="margin-top: 20px;width: 60%;margin-left: 20%;margin-bottom: 20px;min-height: 500px">
                 <el-tab-pane label="修改信息">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
 
-                    <el-button size="mid" type="primary" style="float: right;margin-top: 30px;margin-right: 30px" @click="getUpdateInfo()">确认修改</el-button>
+                    <el-button size="mid" type="primary" style="float: right;margin-top: 30px;margin-right: 30px" @click="changeMyMsg">确认修改</el-button>
 
                 </el-tab-pane>
                 <el-tab-pane label="修改密码">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
 
-                    <el-button size="mid" type="primary" style="float: right;margin-top: 30px;margin-right: 30px" @click="getNewPassword()">重置密码</el-button>
+                    <el-button size="mid" type="primary" style="float: right;margin-top: 30px;margin-right: 30px" @click="changePassword">修改密码</el-button>
 
                 </el-tab-pane>
             </el-tabs>
@@ -86,12 +86,13 @@
 
         data(){
             return {
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
                 password: '',
                 asset_pw: '',
                 again_pw: '',
                 subTabIndex: 0,
-                account:'',
-                nickname:'',
+                account:Cookies.get('account'),
                 phone:'',
                 city:'',
 
@@ -101,11 +102,84 @@
         methods:{
             getMyMsg(){
                 let data={
-
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
                 }
 
+                API.getMyMessage(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    this.nickname=res[0].nickname;
+                    this.city=res[0].city;
+                    this.phone=res[0].phone;
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
+            },
 
+            changeMyMsg(){
+                let data={
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
+                    nickname:this.nickname,
+                    phone:this.phone,
+                    city:this.city,
+                }
+
+                API.changeMyMessage(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(res);
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
+            },
+
+            changePassword(){
+                if(this.password !== Cookies.get('pwd')){
+                    alert("原密码错误！")
+                }else if(this.asset_pw !== this.again_pw){
+                    alert("两次新密码不一致")
+                }
+                else{
+                    let data={
+                        account:Cookies.get('account'),
+                        pwd:this.password,
+                        newpwd:this.asset_pw,
+                    }
+
+                    API.changePwd(data).then(res => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(res);
+                    }).catch(msg => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(msg)
+                    })
+                }
             }
+
+        },
+
+        mounted() {
+            this.getMyMsg();
         }
     }
 </script>

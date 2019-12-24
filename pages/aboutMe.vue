@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
         <div class="bodyClass">
                 <el-card class="card">
                     <img src="../assets/image/photo1.png" class="image">
@@ -17,7 +17,7 @@
                     </div>
                 </el-card>
                 <el-card class="card">
-                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+                    <img src="../assets/image/photo2.jpg" class="image">
                     <div style="padding: 14px;">
                         <span>组员-陈子康</span>
                         <p>主要工作：后端代码编写</p>
@@ -38,6 +38,7 @@
 <script>
     import TraMenu from "../components/TraMenu";
     import TraFooter from "../components/TraFooter";
+    import Cookies from 'js-cookie';
     export default {
         name: "aboutMe",
         components: {TraFooter, TraMenu},
@@ -45,6 +46,8 @@
         data(){
             return{
                 pageIndex:'6',
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
             }
         }
     }

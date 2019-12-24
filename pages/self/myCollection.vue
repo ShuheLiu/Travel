@@ -1,6 +1,6 @@
 <template>
     <div class="bodyClass">
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
         <el-card style="width: 80%;margin-left: 10%;margin-bottom: 20px;min-height: 555px;margin-top: 10px">
             <p style="margin-top: 10px;margin-bottom: 20px;font-size: 25px">我的收藏</p>
             <strategy-list :strategyList="strategyList"></strategy-list>
@@ -23,6 +23,8 @@
         data(){
             return{
                 pageIndex:'',
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
                 strategyList:[{
                     strid:'0010',
                     title:'攻略a',
@@ -51,7 +53,8 @@
         methods:{
             getMyStrategyList(){
                 let data ={
-                    identity:Cookies.get('identity')
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
                 }
                 API.getMyCollStraList(data).then(res => {
                     if(res.code){
@@ -71,7 +74,7 @@
         },
 
         mounted() {
-            //this.getMyStrategyList();
+            this.getMyStrategyList();
         }
 
 

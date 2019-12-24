@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tra-menu :pageIndex="pageIndex"></tra-menu>
+    <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
     <div class="bodyClass">
       <el-carousel class="caro" height="500px">
         <el-carousel-item v-for="item in 4" :key="item">
@@ -35,14 +35,17 @@
   import TraFooter from "../components/TraFooter";
   import ScenicList from "../components/sceinc/scenicList";
   import StrategyList from "../components/strategy/strategyList";
-  import API from '../api'
+  import API from '../api';
   import TripList from "../components/trip/tripList";
+  import Cookies from 'js-cookie';
   export default {
     components: {TripList, StrategyList, ScenicList, TraFooter, TraMenu},
 
     data(){
       return{
         pageIndex:'1',
+        type:Cookies.get('type'),
+        nickname:Cookies.get('nickname'),
         tripList:[],
         scenicList: [],
         strategyList: [],
