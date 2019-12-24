@@ -118,6 +118,7 @@
                     .catch(_ => {});
             },
 
+
             sign(){
                 let data = {
                     account: this.account,
