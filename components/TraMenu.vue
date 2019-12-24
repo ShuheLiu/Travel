@@ -17,7 +17,7 @@
             <!--<el-menu-item index="7"><i class="el-icon-user-solid"></i>个人中心</el-menu-item>-->
         </el-menu>
 
-        <div v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center">
+        <div v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center;">
             <el-button type="text" @click="centerDialogVisible = true">登录/注册</el-button>
             <el-dialog
                 title="登录"
@@ -55,10 +55,10 @@
                      @select="handleSelect"
                      text-color="#444555">
                 <el-submenu index="1">
-                    <template slot="title">欢迎您！{{this.name}}</template>
-                    <el-menu-item index="1-1">个人中心</el-menu-item>
-                    <el-menu-item index="1-2">我的收藏</el-menu-item>
-                    <el-menu-item index="1-3">我的订单</el-menu-item>
+                    <template slot="title">欢迎您！{{this.nickname}}</template>
+                    <el-menu-item index="1-1" @click="toMySelf">个人中心</el-menu-item>
+                    <el-menu-item index="1-2" @click="toMyCollect">我的收藏</el-menu-item>
+                    <el-menu-item index="1-3" @click="toMyOrder">我的订单</el-menu-item>
                     <el-menu-item index="1-4" @click="dialogVisible = true">退出</el-menu-item>
                 </el-submenu>
             </el-menu>
@@ -88,12 +88,19 @@
         props:{
             pageIndex: {
                 type: String
+            },
+            type:{
+                type: String,
+                default:'0'
+            },
+            nickname:{
+                type: String,
             }
         },
 
         data(){
             return{
-                type:'0',
+                //type:'0',
                 name:"Pika",
                 dialogVisible:false,
                 activeIndex:'',
@@ -101,7 +108,6 @@
                 centerDialogVisible:false,
                 account:'',
                 pwd:'',
-                nickname:'',
             }
         },
 
@@ -123,6 +129,7 @@
                 let data = {
                     account: this.account,
                     pwd: this.pwd,
+                    nickname: this.nickname,
                 }
                 API.setAccount(data).then(res => {
                     alert(res)
@@ -134,34 +141,27 @@
 
             login(){
                 let data = {
-                    account: data.account,
-                    pwd: data.pwd,
-                    nickname: data.nickname,
+                    account: this.account,
+                    pwd: this.pwd,
                 }
+
                 API.isSuccess(data).then(res => {
-                    return res
-                })
-                // let data = {
-                //     token: Cookies.get('token'),
-                // }
-                // API.settingCode(data).then(res => {
-                //     Cookies.set('account', res.account)
-                //     Cookies.set('pwd', res.pws)
-                //
-                //      let roleType = 1
-                //      if (roleType == 1) {
-                //          this.$router.push({path: `/`})
-                //      } else if (roleType == 2) {
-                //          this.$router.push({path: `/agency`})
-                //      } else if (roleType == 3) {
-                //          this.$router.push({path: `/company`})
-                //      }
-                //
-                //     return res
-                // }).catch(msg => {
-                //     console.log(msg)
-                //     alert('编码请求错误，请稍后再试!')
-                // })
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    Cookies.set('account', this.account);
+                    Cookies.set('pwd', this.pwd);
+                    this.type='1';
+                    Cookies.set('type', this.type);
+                    alert(res);
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                });
 
                 this.centerDialogVisible = false;
             },
@@ -195,6 +195,18 @@
                 this.$router.push({path: `/aboutMe`});
             },
 
+            toMyCollect(){
+                this.$router.push({path: `/self/myCollection`});
+            },
+
+            toMySelf(){
+                this.$router.push({path: `/self/selfSetting`});
+            },
+
+            toMyOrder(){
+                this.$router.push({path: `/self/myOrder`});
+            },
+
         }
     }
 </script>
@@ -214,7 +226,6 @@
         background: unset;
         width: 900px;
         z-index: 999;
-        pointer-events: none;
     }
 
     .el-menu-demo2{

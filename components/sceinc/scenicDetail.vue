@@ -1,5 +1,5 @@
 <template>
-    <el-card class="card">
+    <el-card class="card" v-if="isShow">
         <!--<img src="../../assets/image/detailback1.png" style="width: 400px;position: absolute;pointer-events: none;">-->
         <div style="overflow: hidden;margin-left: 20px">
             <span><img src="../../assets/image/left.png" style="height: 40px;float: left"></span>
@@ -22,7 +22,7 @@
             <p style="font-size: 20px;color: green">景区详情：</p>
             <p style="word-break:break-word;line-height: 20px;font-size: 18px">{{this.introduction}}</p>
         </div>
-        <el-button style="float: right;margin-top: 20px;margin-right: 30px;background-color: #accfff;color: black" @click="ticketListVisible=true">我要购票</el-button>
+        <el-button style="float: right;margin-top: 20px;margin-right: 30px;background-color: #accfff;color: black" @click="getTicketList">我要购票</el-button>
 
         <el-dialog title="票种列表" :visible.sync="ticketListVisible">
             <div style="display: table; width: 100%; padding-left: 10px; padding-top: 20px; padding-bottom:15px; padding-right: 10px">
@@ -46,7 +46,7 @@
                         {{index+1}}
                     </div>
                     <div class="tableCell">
-                        {{item.tname}}
+                        {{item.name}}
                     </div>
                     <div class="tableCell">
                         {{item.scenicinfo}}
@@ -82,7 +82,7 @@
     export default {
         name: "scenicDetail",
         props:{
-            sid:'',
+            sid:Number,
         },
 
         data(){
@@ -90,13 +90,14 @@
                 identity:Cookies.get('identity'),
                 ticketListVisible:false,
                 sureBuyingVisible:false,
+                isShow:false,
                 ticketName:'',
-                sname:'故宫',
-                cname:'所属公司',
-                province:'北京',
-                city:'北京',
-                phone:'12345678910',
-                introduction:"xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx",
+                sname:'',
+                cname:'',
+                province:'',
+                city:'',
+                phone:'',
+                introduction:"",
                 ticketList:[{
                     tname:'门票1',
                     scenicinfo:'故宫',
@@ -128,13 +129,13 @@
                         alert(res.message);
                         return;
                     }
-                    this.sname=res.sname;
-                    this.cname=res.cname;
-                    this.province=res.province;
-                    this.city=res.city;
-                    this.phone=res.phone;
-                    this.introduction=res.introduction;
-                    //console.log("res="+res);
+                    this.sname=res[0].sname;
+                    this.cname=res[0].cname;
+                    this.province=res[0].province;
+                    this.city=res[0].city;
+                    this.phone=res[0].phone;
+                    this.introduction=res[0].introduction;
+                    //console.log(res);
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -147,8 +148,10 @@
 
             getTicketList(){
                 let data={
-                    sname:this.sname,
+                    keyword:this.sname,
                 };
+
+                console.log(data);
 
                 API.getTicket(data).then(res => {
                     if(res.code){
@@ -156,7 +159,8 @@
                         return;
                     }
                     this.ticketList=res;
-                    //console.log("res="+res);
+                    console.log(res);
+                    this.ticketListVisible=true;
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -198,8 +202,8 @@
         },
 
         mounted() {
-            //this.getScenicDetail();
-            //this.getTicketList();
+            this.getScenicDetail();
+            this.isShow=true;
         }
     }
 </script>

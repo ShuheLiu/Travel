@@ -40,7 +40,7 @@
     export default {
         name: "strategyDetail",
         props:{
-            strid:'',
+            strid:Number,
         },
 
         data(){
@@ -55,7 +55,7 @@
         methods:{
             getStrategyDetail(){
                 let data={
-                    strid:1,
+                    strid:this.strid,
                 }
 
                 console.log(data);
@@ -66,7 +66,6 @@
                         return;
                     }
                     this.straDetail=res[0];
-                    console.log("??")
                     console.log(res)
                 }).catch(msg => {
                     if(res.code){

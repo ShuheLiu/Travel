@@ -6,8 +6,8 @@
                 <el-col style="margin-bottom: 10px"  v-if="TcommentList.length > 0" v-for="(item) in TcommentList" :key="item.id">
                     <el-card :body-style="{ padding: '10px'}">
                         <div style="display: flow;margin-bottom: 10px;padding: 10px 10px 10px 5px">
-                            <i class="el-icon-s-custom" style="margin-left: 10px;margin-right: 5px;"></i>{{item.vname}}
-                            <i class="el-icon-s-promotion" style="margin-left: 15px;margin-right: 5px;"></i>行程名称：{{item.tripname}}
+                            <i class="el-icon-s-custom" style="margin-left: 10px;margin-right: 5px;"></i>{{item.nickname}}
+                            <!--<i class="el-icon-s-promotion" style="margin-left: 15px;margin-right: 5px;"></i>行程名称：{{item.tranname}}-->
                             <i class="el-icon-date" style="margin-left: 15px;margin-right: 5px;"></i>旅行时间：{{item.jointime}}
                             <p style="margin-left: 7px;margin-top: 5px;">{{item.content}}</p>
                             <div class="time">
@@ -28,37 +28,19 @@
         name: "lagencyComment",
 
         props:{
-            traid:'',
+            tripid:Number,
         },
 
         data(){
             return{
-                TcommentList:[{
-                    vname:'用户',
-                    tripname:'全国游',
-                    jointime:'2019-1-21',
-                    content:'helloworld',
-                    commenttime:'2019-11-22',
-                },{
-                    vname:'用户',
-                    tripname:'全国游',
-                    jointime:'2019-1-21',
-                    content:'helloworld',
-                    commenttime:'2019-11-22',
-                },{
-                    vname:'用户',
-                    tripname:'全国游',
-                    jointime:'2019-1-21',
-                    content:'helloworld',
-                    commenttime:'2019-11-22',
-                },],
+                TcommentList:[],
             }
         },
 
         methods:{
             setLageCommentList(){
                 let data ={
-                    traid:this.traid,
+                    tripid:this.tripid,
                 }
                 API.getTraCommentList(data).then(res => {
                     if(res.code){
@@ -66,6 +48,7 @@
                         return;
                     }
                     this.TcommentList=res;
+                    console.log(this.TcommentList)
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -77,7 +60,7 @@
         },
 
         mounted() {
-            //this.setLageCommentList();
+            this.setLageCommentList();
         }
     }
 </script>

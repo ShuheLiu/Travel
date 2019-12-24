@@ -1,9 +1,9 @@
 <template>
-    <el-card class="card">
+    <el-card class="card" v-if="isShow">
         <h2 style="margin: 3px 10px 0px 10px;font-size: 25px;font-weight: 700;">{{this.tripName}}</h2>
         <div style="margin-top: 20px;margin-left: 15px">
             <i class="el-icon-date"></i>
-            行程时间:{{this.startdate}} - {{this.enddate}}
+            行程时间：{{this.startdate}} - {{this.enddate}}
         </div>
         <div style="margin-top: 10px;margin-bottom: 10px;margin-left: 15px">
             <i class="el-icon-office-building"></i>
@@ -17,10 +17,6 @@
             <p style="font-size: 20px;color: green">行程详情：</p>
             <p style="word-break:break-word;line-height: 20px;font-size: 15px">{{this.route}}</p>
         </div>
-        <div style="margin-left: 15px;margin-right: 30px;margin-top: 20px">
-            <p style="font-size: 20px;color: green">旅行社详情：</p>
-            <p style="word-break:break-word;line-height: 20px;font-size: 15px">{{this.intro}}</p>
-        </div>
         <el-button style="float: right;margin-top: 30px;margin-right: 30px;background-color: #accfff;color: black" @click="attendTrip">参加行程</el-button>
     </el-card>
 </template>
@@ -32,18 +28,19 @@
         name: "tripDetail",
 
         props:{
-            tripid:'',
+            tripid:Number,
         },
 
         data(){
             return{
-                tripName:'北京环游',
-                route:'一个环游1233的旅行',
-                startdate:'1231-11-11',
-                enddate:'5678-11-12',
-                traname:'携程',
-                phone:'1233444444',
-                intro:'opppppod',
+                isShow:false,
+                tripName:'',
+                route:'',
+                startdate:'',
+                enddate:'',
+                traname:'',
+                phone:'',
+                intro:'',
             }
         },
 
@@ -58,13 +55,13 @@
                         alert(res.message);
                         return;
                     }
-                    this.tripName=res.tripName;
-                    this.route=res.route;
-                    this.startdate=res.startdate;
-                    this.enddate=res.enddate;
-                    this.traname=res.traname;
-                    this.phone=res.phone;
-                    this.intro=res.introduction;
+                    this.tripName=res[0].name;
+                    this.route=res[0].route;
+                    this.startdate=res[0].startdate;
+                    this.enddate=res[0].enddate;
+                    this.traname=res[0].traname;
+                    this.phone=res[0].phone;
+                    this.isShow=true;
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -77,7 +74,8 @@
             attendTrip(){
                 let data={
                     tripid:this.tripid,
-                    identity:Cookies.get('identity'),
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
                 }
 
                 API.attendThisTrip(data).then(res => {
@@ -97,7 +95,7 @@
         },
 
         mounted() {
-            //this.getTrDetail();
+            this.getTrDetail();
         }
     }
 </script>

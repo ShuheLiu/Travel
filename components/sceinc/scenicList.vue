@@ -9,7 +9,7 @@
                             <span><img src="../../assets/image/left.png" style="width:12px;margin-right: 2px;margin-top: 5px"></span>{{item.sname}}<span><img src="../../assets/image/right.png" style="width:12px;margin-left: 2px;margin-top: 5px"></span></div>
                         <p style="margin-top: 15px;margin-left: 5px"><span style="margin-right: 3px"><i class="el-icon-location-outline"></i></span>所在省份：<span>{{item.province}}</span></p>
                         <p style="margin-top: 5px;margin-left: 5px"><span style="margin-right: 3px"><i class="el-icon-place"></i></span>所在城市：<span>{{item.city}}</span></p>
-                        <p style="margin-top: 5px;margin-left: 5px;"><span style="margin-right: 3px"><i class="el-icon-date"></i></span>开放时间：<span>{{item.worktime}}</span></p>
+                        <p style="margin-top: 5px;margin-left: 5px;"><span style="margin-right: 3px"><i class="el-icon-date"></i></span>开放时间：<span>{{item.opentime}} - {{item.closetime}}</span></p>
                         <p style="margin-left: 5px;margin-top: 15px;word-break:break-word;font-size: 13px">{{item.introduction| ellipsis}}</p>
                         <el-button type="text" class="button" @click="toScenicDetail(item)">详情</el-button>
                     </div>

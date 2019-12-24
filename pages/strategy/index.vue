@@ -1,8 +1,8 @@
 <template>
     <div class="bodyClass">
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
-        <div style="position: fixed;margin-top: 50px;width: 100px;float: right">
-            <el-button @click="toNewStrategy">New Strategy</el-button>
+        <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
+        <div style="position: fixed;margin-top: 50px;width: 120px;background-color: #462680;cursor:pointer;border-radius: 0 16px 16px 0" @click="toNewStrategy">
+            <p style="color: white;line-height: 40px;float: right;margin-right: 12px">New Strategy</p>
         </div>
 
         <div>
@@ -26,7 +26,8 @@
     import StrategyList from "../../components/strategy/strategyList";
     import TraFooter from "../../components/TraFooter";
     import Search from "../../components/search";
-    import API from '../../api'
+    import API from '../../api';
+    import Cookies from 'js-cookie';
     export default {
         name: "index",
         components: {Search, TraFooter, StrategyList, TraMenu},
@@ -35,52 +36,10 @@
             return{
                 pageIndex:'3',
                 activeName: 'first',
+                type:Cookies.get('type'),
+                nickname:Cookies.get('nickname'),
                 strategyList: [],
-                identity:'1',
-
-                strategyList2: [{
-                    strid:'0010',
-                    title:'攻略a',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2018-11-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0011',
-                    title:'攻略b',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2016-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0012',
-                    title:'攻略c',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2019-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0013',
-                    title:'攻略d',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2013-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0014',
-                    title:'攻略e',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2013-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },{
-                    strid:'0015',
-                    title:'攻略f',
-                    content:'xxxxxx,xxxxxxx,xxxxxxx',
-                    time:'2013-10-1',
-                    likenum:20,
-                    keyword:'北京 故宫 圆明园',
-                },],
+                strategyList2: [],
             }
         },
 
@@ -107,12 +66,12 @@
             getStrategyList2(){
                 let data ={
                 }
-                API.getCollStraList(data).then(res => {
+                API.getcollStraList(data).then(res => {
                     if(res.code){
                         alert(res.message);
                         return;
                     }
-                    this.strategyList2=res.strategyList;
+                    this.strategyList2=res;
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -133,7 +92,7 @@
 
         mounted() {
             this.getStrategyList();
-            //this.getStrategyList2();
+            this.getStrategyList2();
         },
     }
 </script>

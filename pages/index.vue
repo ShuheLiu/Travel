@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tra-menu :pageIndex="pageIndex"></tra-menu>
+    <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
     <div class="bodyClass">
       <el-carousel class="caro" height="500px">
         <el-carousel-item v-for="item in 4" :key="item">
@@ -35,85 +35,27 @@
   import TraFooter from "../components/TraFooter";
   import ScenicList from "../components/sceinc/scenicList";
   import StrategyList from "../components/strategy/strategyList";
-  import API from '../api'
+  import API from '../api';
   import TripList from "../components/trip/tripList";
+  import Cookies from 'js-cookie';
   export default {
     components: {TripList, StrategyList, ScenicList, TraFooter, TraMenu},
 
     data(){
       return{
         pageIndex:'1',
-        tripList:[{
-            tripid:'12345',
-            route:'北京环游',
-            startdate:'1231-11-11',
-            enddate:'5678-11-12',
-            traname:'携程',
-        },{
-            tripid:'12346',
-            route:'北京环游',
-            startdate:'1231-11-11',
-            enddate:'5678-11-12',
-            traname:'携程',
-        },{
-            tripid:'12347',
-            route:'北京环游',
-            startdate:'1231-11-11',
-            enddate:'5678-11-12',
-            traname:'携程',
-        },],
-        scenicList: [{
-          sid:'11111',
-          sname:'景区a',
-          province:'北京',
-          city:'北京',
-          introduction:'北京故宫博物院建立于1925年，是在明朝、清朝两代皇宫及其收藏的基础上建立起来的中国综合性博物馆，也是中国最大的古代文化艺术博物馆，其文物收藏主要来源于清代宫中旧藏。',
-          worktime:'10:00-18:00',
-        },{
-          sid:'11112',
-          sname:'景区a',
-          province:'北京',
-          city:'重庆',
-          introduction:'北京故宫博物院建立于1925年，是在明朝、清朝两代皇宫及其收藏的基础上建立起来的中国综合性博物馆，也是中国最大的古代文化艺术博物馆，其文物收藏主要来源于清代宫中旧藏。',
-          worktime:'10:00-18:00',
-        },{
-          sid:'11113',
-          sname:'景区a',
-          province:'北京',
-          city:'某某',
-          introduction:'北京故宫博物院建立于1925年，是在明朝、清朝两代皇宫及其收藏的基础上建立起来的中国综合性博物馆，也是中国最大的古代文化艺术博物馆，其文物收藏主要来源于清代宫中旧藏。',
-          worktime:'10:00-18:00',
-        }],
-
-        strategyList: [{
-          strid:'0010',
-          title:'攻略a',
-          content:'xxxxxx,xxxxxxx,xxxxxxx',
-          time:'2018-11-1',
-          likenum:20,
-          keyword:'北京 故宫 圆明园',
-        },{
-          strid:'0011',
-          title:'攻略b',
-          content:'xxxxxx,xxxxxxx,xxxxxxx',
-          time:'2016-10-1',
-          likenum:20,
-          keyword:'北京 故宫 圆明园',
-        },{
-          strid:'0012',
-          title:'攻略c',
-          content:'xxxxxx,xxxxxxx,xxxxxxx',
-          time:'2019-10-1',
-          likenum:20,
-          keyword:'北京 故宫 圆明园',
-        },],
+        type:Cookies.get('type'),
+        nickname:Cookies.get('nickname'),
+        tripList:[],
+        scenicList: [],
+        strategyList: [],
       }
     },
 
     mounted:function () {
       this.interesting();
-      //this.getScenic();
-      //this.getStrategy();
+      this.getScenic();
+      this.getStrategy();
       //this.getTripList();
     },
 
@@ -188,15 +130,17 @@
       },
 
       getScenic(){
-        let data={};
+        let data={
+
+        };
 
         API.getSceList(data).then(res => {
           if(res.code){
             alert(res.message);
             return;
           }
-          for(var i=0;i<3;i++){
-            this.scenicList.push(res.scenicList[i]);
+          for(var i=0;i<3 && i<res.length;i++){
+            this.scenicList.push(res[i]);
           }
           //this.scenicList=res.scenicList;
         }).catch(msg => {
@@ -210,15 +154,17 @@
       },
 
       getStrategy(){
-        let data={};
+        let data={
+
+        };
 
         API.getStraList(data).then(res => {
           if(res.code){
             alert(res.message);
             return;
           }
-          for(var i=0;i<3;i++){
-            this.strategyList.push(res.strategyList[i]);
+          for(var i=0;i<3 && i<res.length;i++){
+            this.strategyList.push(res[i]);
           }
           //this.scenicList=res.scenicList;
         }).catch(msg => {
@@ -240,7 +186,7 @@
             return;
           }
           for(var i=0;i<3;i++){
-            this.tripList.push(res.tripList[i]);
+            this.tripList.push(res[i]);
           }
         }).catch(msg => {
           if(res.code){
