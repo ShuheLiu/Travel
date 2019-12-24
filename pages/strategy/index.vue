@@ -1,11 +1,11 @@
 <template>
     <div class="bodyClass">
         <tra-menu :pageIndex="pageIndex"></tra-menu>
-        <div>
+        <div style="position: fixed;margin-top: 50px;width: 100px;float: right">
+            <el-button @click="toNewStrategy">New Strategy</el-button>
+        </div>
 
-            <div style="position: fixed;margin-top: 50px;width: 120px;cursor:pointer;background: #493a80;border-radius: 0px 16px 16px 0px;" @click="toNewStrategy">
-                <p style="line-height: 50px;margin-left: 18px;color: white">New Strategy</p>
-            </div>
+        <div>
             <search></search>
             <el-tabs style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 515px;margin-top: 10px" v-model="activeName">
                 <el-tab-pane label="按时间" name="first">
@@ -37,7 +37,6 @@
                 activeName: 'first',
                 strategyList: [],
                 identity:'1',
-                /*identity:Cookies.get('identity'),*/
 
                 strategyList2: [],
             }

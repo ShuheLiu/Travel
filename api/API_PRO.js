@@ -4,6 +4,11 @@ export default {
 
     method: 'post',
 
+    //登录模块接口
+    setAccount:{url:'register/vistor'},
+    isSuccess:{},
+    settingCode:{},
+
     //旅游攻略模块接口
     getStraList:{url:'index/strategy/index/time'},
     getStraDetail:{url:'index/strategy/detail'},

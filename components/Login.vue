@@ -1,5 +1,7 @@
 <template>
-  <div class="loginWrapper"></div>
+  <div class="loginWrapper">
+
+  </div>
 </template>
 
 <script type="text/javascript">
