@@ -17,7 +17,8 @@
             <!--<el-menu-item index="7"><i class="el-icon-user-solid"></i>个人中心</el-menu-item>-->
         </el-menu>
 
-        <div v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center">登录/注册
+        <div v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center">
+            <el-button @click="centerDialogVisible = true">登录/注册</el-button>
             <el-dialog
                 title="登录"
                 :visible.sync="centerDialogVisible"
@@ -100,6 +101,10 @@
                         done();
                     })
                     .catch(_ => {});
+            },
+
+            login(){
+                centerdialogVisible = true;
             },
 
             logout(){
