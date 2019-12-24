@@ -24,19 +24,19 @@
                 :visible.sync="centerDialogVisible"
                 width="30%"
                 center>
-             <span slot="footer" class="dialog-footer">
+            <span slot="footer" class="dialog-footer">
                  用户名：
-            <el-input
-              placeholder="请输入手机号或邮箱"
-              v-model="input"
-              clearable>
-              </el-input>
-             密码：
-             <el-input placeholder="请输入密码" v-model="input" show-password></el-input>
-             <el-button @click="centerDialogVisible = false">取 消</el-button>
-             <el-button type="primary" @click="login">确 定</el-button>
+                <el-input
+                 placeholder="请输入手机号或邮箱"
+                 v-model="input"
+                 clearable>
+                </el-input>
+                密码：
+                <el-input placeholder="请输入密码" v-model="input" show-password></el-input>
+                <el-button @click="centerDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="login">确 定</el-button>
             </span>
-              </el-dialog>
+            </el-dialog>
         </div>
 
         <div v-if="type==='1'" style="float: left;margin-top:-75px;">
@@ -114,11 +114,11 @@
 
                     let roleType = this.identityList[0]
                     if (roleType == 1) {
-                        this.$router.push({path: `/main/school_admin`})
+                        this.$router.push({path: `/`})
                     } else if (roleType == 2) {
-                        this.$router.push({path: `/main/admin`})
+                        this.$router.push({path: `/agency`})
                     } else if (roleType == 3) {
-                        this.$router.push({path: `/main/counseller`})
+                        this.$router.push({path: `/company`})
                     }
                     return res
                 }).catch(msg => {
