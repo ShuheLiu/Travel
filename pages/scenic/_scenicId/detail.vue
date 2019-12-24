@@ -4,7 +4,7 @@
         <div class="bodyClass">
             <scenic-detail :sid="sid" style="width: 50%;margin-left: 18%;display: inline-block"></scenic-detail>
             <recommended style="width: 20%;display: inline-block;float: right;margin-right: 140px"></recommended>
-            <comment style="width: 73%;margin-left: 18%;margin-top: 20px"></comment>
+            <comment :sid="sid" style="width: 73%;margin-left: 18%;margin-top: 20px"></comment>
             <el-backtop style="margin-bottom: 75px">
             </el-backtop>
         </div>

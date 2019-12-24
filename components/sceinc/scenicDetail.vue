@@ -63,13 +63,13 @@
 
         <el-dialog
                 title="提示"
-                :visible.sync="dialogVisible"
+                :visible.sync="sureBuyingVisible"
                 width="30%"
-                :before-close="handleClose">
+        >
             <span>确定购买{{this.ticketName}}吗？</span>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="buyTicket">确 定</el-button>
+                <el-button @click="sureBuyingVisible = false">取 消</el-button>
+                <el-button type="primary" @click="buyTicket(ticketName)">确 定</el-button>
             </span>
         </el-dialog>
 
@@ -78,6 +78,7 @@
 
 <script>
     import API from '../../api'
+    import Cookies from 'js-cookie'
     export default {
         name: "scenicDetail",
         props:{
@@ -86,6 +87,7 @@
 
         data(){
             return{
+                identity:Cookies.get('identity'),
                 ticketListVisible:false,
                 sureBuyingVisible:false,
                 ticketName:'',
@@ -117,7 +119,9 @@
 
         methods:{
             getScenicDetail(){
-                let data=this.sid;
+                let data={
+                    sid:this.sid,
+                }
 
                 API.getSceDetail(data).then(res => {
                     if(res.code){
@@ -131,7 +135,6 @@
                     this.phone=res.phone;
                     this.introduction=res.introduction;
                     //console.log("res="+res);
-                    //this.strategyList=res.strategyList;
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -142,18 +145,61 @@
 
             },
 
+            getTicketList(){
+                let data={
+                    sname:this.sname,
+                };
+
+                API.getTicket(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    this.ticketList=res;
+                    //console.log("res="+res);
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
+            },
+
             sureBuying(item){
                 this.sureBuyingVisible=true;
                 this.ticketName=item.tname;
             },
 
-            buyTicket(){
+            buyTicket(tickName){
+                let data={
+                    tname:tickName,
+                    identity:this.identity,
+                };
 
+                API.buySceTicket(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(res);
+                    sureBuyingVisible=false;
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
+            },
+
+            handleClose(done) {
             },
         },
 
         mounted() {
             //this.getScenicDetail();
+            //this.getTicketList();
         }
     }
 </script>

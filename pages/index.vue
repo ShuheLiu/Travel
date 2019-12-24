@@ -18,7 +18,8 @@
       </el-card>
 
       <el-card style="float:right;width: 44%;margin-right: 10%">
-
+          <img src="../assets/image/homeTrip.png" style="float: left;height: 300px">
+          <trip-list :tripList="tripList" style="width: 70%;float: right;margin-bottom: 10px"></trip-list>
       </el-card>
 
       <el-card style="float:right;width: 44%;margin-right: 10%;margin-top: 20px">
@@ -35,13 +36,32 @@
   import ScenicList from "../components/sceinc/scenicList";
   import StrategyList from "../components/strategy/strategyList";
   import API from '../api'
+  import TripList from "../components/trip/tripList";
   export default {
-    components: {StrategyList, ScenicList, TraFooter, TraMenu},
+    components: {TripList, StrategyList, ScenicList, TraFooter, TraMenu},
 
     data(){
       return{
         pageIndex:'1',
-        tripList:[],
+        tripList:[{
+            tripid:'12345',
+            route:'北京环游',
+            startdate:'1231-11-11',
+            enddate:'5678-11-12',
+            traname:'携程',
+        },{
+            tripid:'12346',
+            route:'北京环游',
+            startdate:'1231-11-11',
+            enddate:'5678-11-12',
+            traname:'携程',
+        },{
+            tripid:'12347',
+            route:'北京环游',
+            startdate:'1231-11-11',
+            enddate:'5678-11-12',
+            traname:'携程',
+        },],
         scenicList: [{
           sid:'11111',
           sname:'景区a',

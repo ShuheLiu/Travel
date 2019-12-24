@@ -39,6 +39,10 @@
     export default {
         name: "comment",
 
+        props:{
+            sid:'',
+        },
+
         data(){
             return{
                 identity:Cookies.get('identity'),
@@ -106,8 +110,31 @@
                     }
                     alert(msg)
                 })
-            }
+            },
+
+            setCommentList(){
+                let data ={
+                    sid:this.sid,
+                }
+                API.getSceComment(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    this.commentList=res;
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
+            },
         },
+
+        mounted() {
+            //this.submitComment();
+        }
     }
 </script>
 
