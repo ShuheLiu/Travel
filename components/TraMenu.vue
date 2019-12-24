@@ -18,7 +18,7 @@
         </el-menu>
 
         <div v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center">
-            <el-button @click="centerDialogVisible = true">登录/注册</el-button>
+            <el-button type="text" @click="centerDialogVisible = true">登录/注册</el-button>
             <el-dialog
                 title="登录"
                 :visible.sync="centerDialogVisible"
@@ -28,13 +28,21 @@
                  用户名：
                 <el-input
                  placeholder="请输入手机号或邮箱"
-                 v-model="input"
-                 clearable>
+                 v-model="account"
+                 clearable
+                > </el-input>
+                 昵称：
+                <el-input
+                        placeholder="请输入昵称"
+                        v-model="nickname"
+                        clearable
+                >
                 </el-input>
                 密码：
-                <el-input placeholder="请输入密码" v-model="input" show-password></el-input>
+                <el-input placeholder="请输入密码" v-model="pwd" show-password></el-input>
                 <el-button @click="centerDialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="login">确 定</el-button>
+                <el-button type="primary" @click="login">登录</el-button>
+                <el-button type="primary" @click="sign">注册</el-button>
             </span>
             </el-dialog>
         </div>
@@ -72,6 +80,8 @@
 </template>
 
 <script>
+    import API from '../api'
+    import Cookies from 'js-cookie'
     export default {
         name: "TraMenu",
 
@@ -83,15 +93,20 @@
 
         data(){
             return{
-                type:'1',
+                type:'0',
                 name:"Pika",
                 dialogVisible:false,
                 activeIndex:'',
                 visible:false,
+                centerDialogVisible:false,
+                account:'',
+                pwd:'',
+                nickname:'',
             }
         },
 
         methods:{
+            identityList:[],
             handleSelect(){
             },
 
@@ -103,29 +118,51 @@
                     .catch(_ => {});
             },
 
-            login(){
-                this.centerDialogVisible = false;
+            sign(){
                 let data = {
-                    token: Cookies.get('token'),
+                    account: this.account,
+                    pwd: this.pwd,
                 }
-                API.settingCode(data).then(res => {
-                    Cookies.set('', res.college)
-                    Cookies.set('', res.teacher_position)
-
-
-                    let roleType = this.identityList[0]
-                    if (roleType == 1) {
-                        this.$router.push({path: `/`})
-                    } else if (roleType == 2) {
-                        this.$router.push({path: `/agency`})
-                    } else if (roleType == 3) {
-                        this.$router.push({path: `/company`})
-                    }
-                    return res
+                API.setAccount(data).then(res => {
+                    alert(res)
                 }).catch(msg => {
-                    console.log(msg)
-                    alert('编码请求错误，请稍后再试!')
+                 console.log(msg)
+                 alert('系统错误，请稍后再试!')
+             })
+            },
+
+            login(){
+                let data = {
+                    account: data.account,
+                    pwd: data.pwd,
+                    nickname: data.nickname,
+                }
+                API.isSuccess(data).then(res => {
+                    return res
                 })
+                // let data = {
+                //     token: Cookies.get('token'),
+                // }
+                // API.settingCode(data).then(res => {
+                //     Cookies.set('account', res.account)
+                //     Cookies.set('pwd', res.pws)
+                //
+                //      let roleType = 1
+                //      if (roleType == 1) {
+                //          this.$router.push({path: `/`})
+                //      } else if (roleType == 2) {
+                //          this.$router.push({path: `/agency`})
+                //      } else if (roleType == 3) {
+                //          this.$router.push({path: `/company`})
+                //      }
+                //
+                //     return res
+                // }).catch(msg => {
+                //     console.log(msg)
+                //     alert('编码请求错误，请稍后再试!')
+                // })
+
+                this.centerDialogVisible = false;
             },
 
             logout(){
@@ -176,6 +213,7 @@
         background: unset;
         width: 900px;
         z-index: 999;
+        pointer-events: none;
     }
 
     .el-menu-demo2{
