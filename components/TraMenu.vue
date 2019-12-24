@@ -104,6 +104,27 @@
 
             login(){
                 this.centerDialogVisible = false;
+                let data = {
+                    token: Cookies.get('token'),
+                }
+                API.settingCode(data).then(res => {
+                    Cookies.set('', res.college)
+                    Cookies.set('', res.teacher_position)
+
+
+                    let roleType = this.identityList[0]
+                    if (roleType == 1) {
+                        this.$router.push({path: `/main/school_admin`})
+                    } else if (roleType == 2) {
+                        this.$router.push({path: `/main/admin`})
+                    } else if (roleType == 3) {
+                        this.$router.push({path: `/main/counseller`})
+                    }
+                    return res
+                }).catch(msg => {
+                    console.log(msg)
+                    alert('编码请求错误，请稍后再试!')
+                })
             },
 
             logout(){
