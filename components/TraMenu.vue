@@ -33,9 +33,8 @@
               </el-input>
              密码：
              <el-input placeholder="请输入密码" v-model="input" show-password></el-input>
-
              <el-button @click="centerDialogVisible = false">取 消</el-button>
-             <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+             <el-button type="primary" @click="login">确 定</el-button>
             </span>
               </el-dialog>
         </div>
@@ -104,7 +103,7 @@
             },
 
             login(){
-                centerdialogVisible = true;
+                this.centerDialogVisible = false;
             },
 
             logout(){
