@@ -11,16 +11,21 @@ export default {
     getMyCollStraList:{},
     collStra:{},
     uncollStra:{},
+    newStrategy:{},
 
     //景区模块接口
     getSceList:{},
     getSceDetail:{},
     getSceComment:{},
     writeSceComment:{},
+    getTicket:{},
+    buySceTicket:{},
 
     //旅游线路模块接口
     getTripList:{},
     getTripDetail:{},
+    attendThisTrip:{},
+    getTraCommentList:{},
 
 
 }

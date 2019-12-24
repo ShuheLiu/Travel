@@ -36,7 +36,7 @@
 
 <script>
     import API from '../../api'
-    import qs from 'qs'
+    import Cookies from 'js-cookie'
     export default {
         name: "strategyDetail",
         props:{
@@ -49,12 +49,6 @@
                 /*identity: Cookies.get('identity'),*/
                 isCollected:'0',
                 straDetail:[],
-                title:'北京十日自由行',
-                author:'张三',
-                time:'1111-11-11',
-                keyword:'a b c',
-                content:"xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx,xxxxxx,xxxxxxxxxxxx",
-
             }
         },
 
@@ -139,7 +133,7 @@
         background-size: 350px;
         background-repeat: no-repeat;
         background-position: center;
-        background-position-x: 320px;
+        background-position-x: 300px;
         min-height: 585px;
         padding: 10px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
