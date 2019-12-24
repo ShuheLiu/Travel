@@ -4,6 +4,9 @@
         <div class="bodyClass">
             <scenic-detail :sid="sid" style="width: 50%;margin-left: 18%;display: inline-block"></scenic-detail>
             <recommended style="width: 20%;display: inline-block;float: right;margin-right: 140px"></recommended>
+            <comment style="width: 73%;margin-left: 18%;margin-top: 20px"></comment>
+            <el-backtop style="margin-bottom: 75px">
+            </el-backtop>
         </div>
         <tra-footer></tra-footer>
     </div>
@@ -14,9 +17,10 @@
     import ScenicDetail from "../../../components/sceinc/scenicDetail";
     import Recommended from "../../../components/recommended";
     import TraFooter from "../../../components/TraFooter";
+    import Comment from "../../../components/sceinc/comment";
     export default {
         name: "detail",
-        components: {TraFooter, Recommended, ScenicDetail, TraMenu},
+        components: {Comment, TraFooter, Recommended, ScenicDetail, TraMenu},
         data(){
             return{
                 pageIndex:'2',
