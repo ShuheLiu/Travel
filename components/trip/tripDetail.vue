@@ -17,7 +17,8 @@
             <p style="font-size: 20px;color: green">行程详情：</p>
             <p style="word-break:break-word;line-height: 20px;font-size: 15px">{{this.route}}</p>
         </div>
-        <el-button style="float: right;margin-top: 30px;margin-right: 30px;background-color: #accfff;color: black" @click="attendTrip">参加行程</el-button>
+        <el-button v-if="!isattend" style="float: right;margin-top: 30px;margin-right: 30px;background-color: #accfff;color: black" @click="attendTrip">参加行程</el-button>
+        <el-button v-if="isattend" style="float: right;margin-top: 30px;margin-right: 30px;background-color: #eeeeee;color: black">已参加</el-button>
     </el-card>
 </template>
 
@@ -33,7 +34,7 @@
 
         data(){
             return{
-                isShow:false,
+                isShow:true,
                 tripName:'',
                 route:'',
                 startdate:'',
@@ -41,6 +42,8 @@
                 traname:'',
                 phone:'',
                 intro:'',
+                isattend:false,
+                type:Cookies.get('type'),
             }
         },
 
@@ -69,28 +72,54 @@
                     }
                     alert(msg)
                 })
+
+                if(this.type==='1'){
+                    let data2={
+                        account:Cookies.get('account'),
+                        pwd:Cookies.get('pwd'),
+                        tripid:this.tripid,
+                    }
+
+                    API.attendState(data2).then(res => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        this.isattend=res;
+                    }).catch(msg => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(msg)
+                    })
+                }
             },
 
             attendTrip(){
-                let data={
-                    tripid:this.tripid,
-                    account:Cookies.get('account'),
-                    pwd:Cookies.get('pwd'),
-                }
+                if(this.type!=='1'){
+                    alert("请先登录")
+                }else {
+                    let data={
+                        tripid:this.tripid,
+                        account:Cookies.get('account'),
+                        pwd:Cookies.get('pwd'),
+                    }
 
-                API.attendThisTrip(data).then(res => {
-                    if(res.code){
-                        alert(res.message);
-                        return;
-                    }
-                    alert("加入成功");
-                }).catch(msg => {
-                    if(res.code){
-                        alert(res.message);
-                        return;
-                    }
-                    alert(msg)
-                })
+                    API.attendThisTrip(data).then(res => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert("加入成功");
+                    }).catch(msg => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(msg)
+                    })
+                }
             },
         },
 

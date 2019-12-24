@@ -3,7 +3,7 @@
         <tra-menu :pageIndex="pageIndex" :type="type" :nickname="nickname"></tra-menu>
         <div class="bodyClass" v-if="isShow">
             <scenic-detail :sid="sid" style="width: 50%;margin-left: 18%;display: inline-block"></scenic-detail>
-            <recommended style="width: 20%;display: inline-block;float: right;margin-right: 140px"></recommended>
+            <sce-recom style="width: 20%;display: inline-block;float: right;margin-right: 140px"></sce-recom>
             <comment :sid="sid" style="width: 73%;margin-left: 18%;margin-top: 20px"></comment>
             <el-backtop style="margin-bottom: 75px">
             </el-backtop>
@@ -19,9 +19,10 @@
     import TraFooter from "../../../components/TraFooter";
     import Comment from "../../../components/sceinc/comment";
     import Cookies from 'js-cookie'
+    import SceRecom from "../../../components/sceRecom";
     export default {
         name: "detail",
-        components: {Comment, TraFooter, Recommended, ScenicDetail, TraMenu},
+        components: {SceRecom, Comment, TraFooter, Recommended, ScenicDetail, TraMenu},
         data(){
             return{
                 pageIndex:'2',

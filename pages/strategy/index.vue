@@ -82,7 +82,7 @@
             },
 
             toNewStrategy(){
-                if(this.identity!==''){
+                if(this.type==='1'){
                     this.$router.push({path: `/strategy/new`})
                 }else{
                     alert("请先登录");

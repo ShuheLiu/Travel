@@ -27,8 +27,9 @@
         </div>
 
         <div style="margin-top: 40px">
-            <el-button size="small" style="background-color: #dd6161;color: white;float: right;" circle>赞</el-button>
-            <el-button size="small" style="background-color: #ffbd4a;color: white;float: right;margin-right: 15px" icon="el-icon-star-off" circle></el-button>
+            <span style="color: #dd6161;float: right;margin-top: 5px;margin-left: 8px">{{this.straDetail.like}}</span>
+            <el-button size="small" style="background-color: #dd6161;color: white;float: right;" circle @click="likeStra">赞</el-button>
+
         </div>
 
     </el-card>
@@ -45,8 +46,7 @@
 
         data(){
             return{
-                identity:'000',
-                /*identity: Cookies.get('identity'),*/
+                type:Cookies.get('type'),
                 isCollected:'0',
                 straDetail:[],
             }
@@ -57,8 +57,6 @@
                 let data={
                     strid:this.strid,
                 }
-
-                console.log(data);
 
                 API.getStraDetail(data).then(res => {
                     if(res.code){
@@ -74,31 +72,64 @@
                     }
                     alert(msg)
                 })
+
+                if(this.type==='1'){
+                    let data2={
+                        account:Cookies.get('account'),
+                        pwd:Cookies.get('pwd'),
+                        strid:this.strid,
+                    }
+                    API.collState(data2).then(res => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+
+                        if(res===true){
+                            this.isCollected='1'
+                        }else{
+                            this.isCollected='0'
+                        }
+                    }).catch(msg => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(msg)
+                    })
+                }
             },
 
             collect(){
-                let data ={
-                    identity: this.identity,
-                    strid : this.strid
+                if(this.type==='1'){
+                    let data ={
+                        account:Cookies.get('account'),
+                        pwd:Cookies.get('pwd'),
+                        strid : this.strid
+                    }
+                    API.collStra(data).then(res => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(res)
+                    }).catch(msg => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(msg)
+                    })
+                    this.isCollected='1';
+                }else{
+                    alert("请先登录")
                 }
-                API.collStra(data).then(res => {
-                    if(res.code){
-                        alert(res.message);
-                        return;
-                    }
-                }).catch(msg => {
-                    if(res.code){
-                        alert(res.message);
-                        return;
-                    }
-                    alert(msg)
-                })
-                this.isCollected='1';
             },
 
             uncollect(){
                 let data ={
-                    identity: this.identity,
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
                     strid : this.strid
                 }
                 API.uncollStra(data).then(res => {
@@ -106,14 +137,35 @@
                         alert(res.message);
                         return;
                     }
+                    alert(res);
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
                         return;
                     }
                     alert(msg)
-                })
+                });
                 this.isCollected='0';
+            },
+
+            likeStra(){
+                let data ={
+                    strid : this.strid
+                }
+
+                API.like(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    this.straDetail.like=res;
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                });
             }
 
         },
