@@ -107,6 +107,20 @@
             </el-menu>
         </div>
 
+        <div v-if="userType==='1'" style="float: left;margin-top:-75px;">
+            <el-menu :default-active="activeIndex"
+                     class="el-menu-demo2"
+                     mode="horizontal"
+                     @select="handleSelect"
+                     text-color="#444555">
+                <el-submenu index="1">
+                    <template slot="title">欢迎您！{{this.nickname}}</template>
+                    <el-menu-item index="1-1" @click="toMySelf">个人中心</el-menu-item>
+                    <el-menu-item index="1-4" @click="dialogVisible = true">退出</el-menu-item>
+                </el-submenu>
+            </el-menu>
+        </div>
+
         <el-dialog
                 title="提示"
                 :visible.sync="dialogVisible"
