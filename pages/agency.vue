@@ -163,7 +163,7 @@
 <script>
     import TraMenu from "../components/TraMenu";
     import TraFooter from "../components/TraFooter";
-    import API from "../api/API_PRO";
+    import API from "../api";
     import Cookies from 'js-cookie'
     import TripList from "../components/trip/tripList";
     export default {
@@ -240,34 +240,34 @@
             })
         },
 
-        changeAgencyPwd(){
-            if(this.password !== Cookies.get('pwd')){
-                alert("原密码错误！")
-            }else if(this.asset_pw !== this.again_pw){
-                alert("两次新密码不一致")
-            }
-            else{
-                let data={
-                    account:Cookies.get('account'),
-                    pwd:this.password,
-                    newpwd:this.asset_pw,
-                }
-
-                API.changeAgencyPwd(data).then(res => {
-                    if(res.code){
-                        alert(res.message);
-                        return;
-                    }
-                    alert(res);
-                }).catch(msg => {
-                    if(res.code){
-                        alert(res.message);
-                        return;
-                    }
-                    alert(msg)
-                })
-            }
-        },
+        // changeAgencyPwd(){
+        //     if(this.password !== Cookies.get('pwd')){
+        //         alert("原密码错误！")
+        //     }else if(this.asset_pw !== this.again_pw){
+        //         alert("两次新密码不一致")
+        //     }
+        //     else{
+        //         let data={
+        //             account:Cookies.get('account'),
+        //             pwd:this.password,
+        //             newpwd:this.asset_pw,
+        //         }
+        //
+        //         API.changeAgencyPwd(data).then(res => {
+        //             if(res.code){
+        //                 alert(res.message);
+        //                 return;
+        //             }
+        //             alert(res);
+        //         }).catch(msg => {
+        //             if(res.code){
+        //                 alert(res.message);
+        //                 return;
+        //             }
+        //             alert(msg)
+        //         })
+        //     }
+        // },
 
         deleteAgency(){
             let data={

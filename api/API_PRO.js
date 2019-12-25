@@ -56,16 +56,16 @@ export default {
     changeCommentTrip:{url:'visitor/modifytripcomment'},//未测v
 
     //旅行社
-    getAgencyMessage:{},
-    changeAgencyMessage:{},
-    changeAgencyPwd:{},
-    deleteAgency:{},
+    getAgencyMessage:{url:'travelagency/myinfo'},
+    changeAgencyMessage:{url:'travelagency/modifyinfo'},
+    changeAgencyPwd:{url:'travelagency/modifyinfo'},
+    deleteAgency:{url:'travelagency/myinfo'},
     addTrip:{url:'travelagency/newtrip'},
     deleteTrip:{url:'travelagency/deletetrip'},
 
     //承包公司
-    getCompanyMessage:{},
-    changeCompanyMessage:{},
-    changeCompanyPwd:{},
-    deleteCompany:{},
+    getCompanyMessage:{url:'company/myinfo'},
+    changeCompanyMessage:{url:'company/modifyinfo'},
+    changeCompanyPwd:{url:'company/modifyinfo'},
+    deleteCompany:{url:'company/deleteself'},
 }
