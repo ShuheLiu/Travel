@@ -24,26 +24,38 @@
                 :visible.sync="centerDialogVisible"
                 width="30%"
                 center>
-            <span slot="footer" class="dialog-footer">
-                 用户名：
-                <el-input
-                 placeholder="请输入手机号或邮箱"
-                 v-model="account"
-                 clearable
-                > </el-input>
-                 昵称：
-                <el-input
-                        placeholder="请输入昵称"
-                        v-model="nickname"
-                        clearable
-                >
-                </el-input>
-                密码：
-                <el-input placeholder="请输入密码" v-model="pwd" show-password></el-input>
-                <el-button @click="centerDialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="login">登录</el-button>
-                <el-button type="primary" @click="sign">注册</el-button>
-            </span>
+<!--            <span slot="footer" class="dialog-footer">-->
+<!--                 用户名：-->
+<!--                <el-input-->
+<!--                 placeholder="请输入手机号或邮箱"-->
+<!--                 v-model="account"-->
+<!--                 clearable-->
+<!--                > </el-input>-->
+<!--                 昵称：-->
+<!--                <el-input-->
+<!--                        placeholder="请输入昵称"-->
+<!--                        v-model="nickname"-->
+<!--                        clearable-->
+<!--                >-->
+<!--                </el-input>-->
+<!--                密码：-->
+<!--                <el-input placeholder="请输入密码" v-model="pwd" show-password></el-input>-->
+<!--                <el-button @click="centerDialogVisible = false">取 消</el-button>-->
+<!--                <el-button type="primary" @click="login">登录</el-button>-->
+<!--                <el-button type="primary" @click="sign">注册</el-button>-->
+<!--            </span>-->
+                <el-form :model="form">
+                    <el-form-item label="用户名" :label-width="formLabelWidth">
+                        <el-input placeholder="请输入手机号或邮箱" v-model="account" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码" :label-width="formLabelWidth">
+                        <el-input placeholder="请输入密码" v-model="pwd" show-password></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="login">确 定</el-button>
+                </div>
             </el-dialog>
         </div>
 
