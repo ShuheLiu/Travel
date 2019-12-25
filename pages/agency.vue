@@ -87,6 +87,7 @@
             </span>
             </el-dialog>
             <el-tab-pane label="路线管理" ></el-tab-pane>
+
                 <trip-list :tripList="tripList" style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 565px;margin-top: 20px"></trip-list>
                 <el-button type="text" @click="adddialogVisible = true" style="align: center">添加新路线</el-button><br>
 
