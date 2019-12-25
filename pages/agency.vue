@@ -168,7 +168,7 @@
     import TripList from "../components/trip/tripList";
     export default {
         name: "agency",
-        components: {TraFooter, TraMenu},
+        components: {TripList, TraFooter, TraMenu},
         data() {
             return {
                 tabPosition: 'left',
@@ -231,6 +231,27 @@
                     return;
                 }
                 alert(res);
+            }).catch(msg => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                alert(msg)
+            })
+        },
+
+        getTrList(){
+            let data ={
+                account:Cookies.get('account'),
+                pwd:Cookies.get('pwd'),
+            }
+            API.MTrip(data).then(res => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                this.tripList=res;
+                console.log(this.tripList);
             }).catch(msg => {
                 if(res.code){
                     alert(res.message);
@@ -317,6 +338,7 @@
 
     mounted() {
         this.getAgencyMessage();
+        this.getTrList();
     }
     }
 </script>

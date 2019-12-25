@@ -62,6 +62,7 @@ export default {
     deleteAgency:{url:'travelagency/myinfo'},
     addTrip:{url:'travelagency/newtrip'},
     deleteTrip:{url:'travelagency/deletetrip'},
+    MTrip:{url:'travelagency/mytrip'},
 
     //承包公司
     getCompanyMessage:{url:'company/myinfo'},
