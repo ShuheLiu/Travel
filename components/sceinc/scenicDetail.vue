@@ -7,6 +7,10 @@
             <span><img src="../../assets/image/right.png" style="height: 40px;float: left"></span>
         </div>
         <div style="margin-top: 20px;margin-bottom: 10px;margin-left: 30px">
+            <i class="el-icon-date"></i>
+            开放时间：{{this.opentime}} - {{this.closetime}}
+        </div>
+        <div style="margin-left: 30px;margin-bottom: 10px">
             <i class="el-icon-office-building"></i>
             所属公司：{{this.cname}}
         </div>
@@ -97,24 +101,10 @@
                 province:'',
                 city:'',
                 phone:'',
+                opentime:'',
+                closetime:'',
                 introduction:"",
-                ticketList:[{
-                    tname:'门票1',
-                    scenicinfo:'故宫',
-                    price:50,
-                },{
-                    tname:'门票2',
-                    scenicinfo:'故宫 颐和园',
-                    price:100,
-                },{
-                    tname:'门票3',
-                    scenicinfo:'故宫 颐和园 景山',
-                    price:150,
-                },{
-                    tname:'门票3',
-                    scenicinfo:'故宫 颐和园 景山',
-                    price:150,
-                },],
+                ticketList:[],
             }
         },
 
@@ -135,13 +125,15 @@
                     this.city=res[0].city;
                     this.phone=res[0].phone;
                     this.introduction=res[0].introduction;
+                    this.opentime=res[0].opentime;
+                    this.closetime=res[0].closetime;
                     //console.log(res);
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
                         return;
                     }
-                    alert(msg)
+                    alert(msg)``
                 })
 
             },
@@ -150,8 +142,6 @@
                 let data={
                     keyword:this.sname,
                 };
-
-                console.log(data);
 
                 API.getTicket(data).then(res => {
                     if(res.code){
