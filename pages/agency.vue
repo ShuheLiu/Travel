@@ -88,6 +88,61 @@
             </el-dialog>
             <el-tab-pane label="路线管理" ></el-tab-pane>
                 <trip-list :tripList="tripList" style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 565px;margin-top: 20px"></trip-list>
+                <el-button type="text" @click="adddialogVisible = true" style="align: center">添加新路线</el-button><br>
+
+                <el-dialog
+                    title="添加新路线"
+                    :visible.sync="adddialogVisible"
+                    width="30%"
+                    center
+                    :before-close="handleClose">
+                    <el-form :model="form">
+                        <el-form-item label="路线名称" >
+                            <el-input placeholder="请输入路线名称" v-model="tripName" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="路线" >
+                            <el-input placeholder="请输入路线" v-model="route" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="选择日期" ><br>
+                            <div class="block">
+                            <span class="demonstration" style="margin-right: 20px">开始日期</span>
+                            <el-date-picker
+                                    v-model="startDate"
+                                    type="date"
+                                    placeholder="请选择开始日期">
+                            </el-date-picker><br>
+                                <span class="demonstration" style="margin-right: 20px">结束日期</span>
+                                <el-date-picker
+                                        v-model="endDate"
+                                        type="date"
+                                        placeholder="请选择结束日期">
+                                </el-date-picker>
+                        </div>
+                        </el-form-item>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="adddialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="login" style="margin-left: 100px" >确 定</el-button>
+                    </div>
+            </el-dialog>
+
+            <el-button type="text" @click="deldialogVisible = true" style="align: center">删除路线</el-button>
+            <el-dialog
+                    title="删除路线"
+                    :visible.sync="deldialogVisible"
+                    width="30%"
+                    center
+                    :before-close="handleClose">
+
+                <el-checkbox v-model="checked">路线1</el-checkbox>
+
+
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="adddialogVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="login" style="margin-left: 100px" >确 定</el-button>
+                </div>
+            </el-dialog>
+
             <el-tab-pane label="数据中心" >
                 <span style="font-size: 18px; padding: 60px">数据总览</span>
                 <el-card class="box-card">
@@ -127,7 +182,13 @@
                 phone:'',
                 city:'',
                 dialogVisible:false,
+                adddialogVisible:false,
+                deldialogVisible:false,
                 tripList:[],
+                tripName:'',
+                route:'',
+                startDate:'',
+                endDate:'',
             }
         },
 
@@ -228,7 +289,29 @@
             //     }
             //     alert(msg)
             // })
-        }
+        },
+
+        addTrip(){
+            let data={
+                tripName:'',
+                route:'',
+                startDate:'',
+                endDate:'',
+            }
+            // API.addTrip(data).then(res => {
+            //     if(res.code){
+            //         alert(res.message);
+            //         return;
+            //     }
+            //     alert(res);
+            // }).catch(msg => {
+            //     if(res.code){
+            //         alert(res.message);
+            //         return;
+            //     }
+            //     alert(msg)
+            // })
+        },
 
     },
 

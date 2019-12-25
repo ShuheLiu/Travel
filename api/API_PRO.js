@@ -42,6 +42,7 @@ export default {
     getTraCommentList:{url:'index/trip/travelagencycomments'},
     attendState:{url:'visitor/attendtripstate'},//未测v
 
+
     //我的
     getMyMessage:{url:'visitor/myinfo'},//未测v
     changeMyMessage:{url:'visitor/modifyinfo'},//未测v
@@ -55,5 +56,12 @@ export default {
     changeAgencyMessage:{},
     changeAgencyPwd:{},
     deleteAgency:{},
+    addTrip:{url:'travelagency/newtrip'},
+    deleteTrip:{url:'travelagency/deletetrip'},
 
+    //承包公司
+    getCompanyMessage:{},
+    changeCompanyMessage:{},
+    changeCompanyPwd:{},
+    deleteCompany:{},
 }
