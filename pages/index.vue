@@ -22,8 +22,10 @@
           <trip-list :tripList="tripList" style="width: 70%;float: right;margin-bottom: 10px"></trip-list>
       </el-card>
 
-      <el-card style="float:right;width: 44%;margin-right: 10%;margin-top: 20px">
-
+      <el-card style="float:right;width: 44%;margin-right: 10%;margin-top: 20px;height: 200px">
+        <img src="../assets/image/company.jpg" style="float: left;width: 150px">
+        <p style="margin-top: 20px">← 扫码关注，获取团队最新动态</p>
+        <p style="margin-top: 20px;margin-left: 60px;color: blue;;font-size: 20px">广告位招商，有意致电888-8888-8888</p>
       </el-card>
     </div>
     <tra-footer style="position: absolute;"></tra-footer>
@@ -56,7 +58,7 @@
       this.interesting();
       this.getScenic();
       this.getStrategy();
-      //this.getTripList();
+      this.getTrip();
     },
 
     methods:{

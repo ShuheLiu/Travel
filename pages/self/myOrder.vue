@@ -68,7 +68,7 @@
                                 {{item.route}}
                             </div>
                             <div class="tableCell">
-                                {{item.starttime}} - {{item.endtime}}
+                                {{item.startdate}} - {{item.enddate}}
                             </div>
                             <div class="tableCell">
                                 {{item.jointime}}
@@ -76,10 +76,10 @@
                             <div class="tableCell">
                                 <el-button type="primary" size="mini" @click="toDetail(item)">详情</el-button>
                             </div>
-                            <div class="tableCell" v-if="item.content===''">
+                            <div class="tableCell" v-if="item.content===null">
                                 <el-button type="primary" size="mini" @click="setMsg(item)">评论</el-button>
                             </div>
-                            <div class="tableCell" v-if="item.content!==''">
+                            <div class="tableCell" v-if="item.content!==null">
                                 <el-button type="primary" size="mini" @click="setMsg2(item)">修改评论</el-button>
                             </div>
                         </div>
@@ -136,23 +136,7 @@
                 tripName:'',
                 tripId:'',
                 ticketList:[],
-                tripList:[{
-                    tripid:'1',
-                    name:'1111',
-                    route:'xxx-xxxx-xxx',
-                    starttime:'112345',
-                    endtime:'123455',
-                    jointime:'11-1123-11',
-                    content:'',
-                },{
-                    tripid:'1',
-                    name:'1111',
-                    route:'xxx-xxxx-xxx',
-                    starttime:'112345',
-                    endtime:'123455',
-                    jointime:'11-1123-11',
-                    content:'hello',
-                },],
+                tripList:[],
                 newcontent:'',
                 mycontent:'',
             }
@@ -210,13 +194,13 @@
                     content:this.newcontent,
                     tripid:this.tripId,
                 }
-                console.log("submit");
-                console.log(data);
                 API.commentTrip(data).then(res => {
                     if(res.code){
                         alert(res.message);
                         return;
                     }
+                    this.writeTripComment = false;
+                    this.getMyTrip();
                     alert(res);
                 }).catch(msg => {
                     if(res.code){
@@ -234,14 +218,13 @@
                     content:this.mycontent,
                     tripid:this.tripId,
                 }
-
-                console.log("change");
-                console.log(data);
                 API.changeCommentTrip(data).then(res => {
                     if(res.code){
                         alert(res.message);
                         return;
                     }
+                    this.writeTripComment2 = false;
+                    this.getMyTrip();
                     alert(res);
                 }).catch(msg => {
                     if(res.code){

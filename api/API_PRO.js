@@ -1,8 +1,8 @@
 export default {
 
-    //baseURL: 'http://192.168.43.19:8080/',
+    baseURL: 'http://192.168.43.19:8080/',
 
-    baseURL: 'http://127.0.0.1:8080/',
+    //baseURL: 'http://127.0.0.1:8080/',
     method: 'post',
 
     //登录模块接口
@@ -34,6 +34,7 @@ export default {
     buySceTicket:{url:'visitor/buyticket'},//未测v
     writeSceState:{url:'visitor/commentscenicstate'},//未测v
     changeSceComment:{url:'visitor/modifysceniccomment'},//未测v
+    searchSce:{url:'index/scenic/searchbykeyword'},//未测v
 
     //旅游线路模块接口
     getTripList:{url:'index/trip/index'},

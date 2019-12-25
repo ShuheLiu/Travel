@@ -15,7 +15,7 @@
                     <div style="margin-top: 15px; margin-left: 50px;" class="display-row">
                         <div class="filelabel row-left" style="margin-top: 5px; width: 100px"><p>昵称:</p></div>
                         <div class="titleinput row-right">
-                            <el-input placeholder="昵称" v-model="this.nickname"></el-input>
+                            <el-input placeholder="昵称" v-model="nickname1"></el-input>
                         </div>
                         <div style="color: red; margin-left: 10px; margin-top: 7px; font-size: 22px"><p>*</p></div>
                     </div>
@@ -23,14 +23,14 @@
                     <div style="margin-top: 15px; margin-left: 50px;" class="display-row">
                         <div class="filelabel row-left" style="margin-top: 5px; width: 100px"><p>联系电话:</p></div>
                         <div class="titleinput row-right">
-                            <el-input placeholder="联系电话" v-model="this.phone"></el-input>
+                            <el-input placeholder="联系电话" v-model="phone"></el-input>
                         </div>
                     </div>
 
                     <div style="margin-top: 15px; margin-left: 50px;" class="display-row">
                         <div class="filelabel row-left" style="margin-top: 5px; width: 100px"><p>所在城市:</p></div>
                         <div class="titleinput row-right">
-                            <el-input placeholder="所在城市" v-model="this.city"></el-input>
+                            <el-input placeholder="所在城市" v-model="city"></el-input>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                         <el-button type="text" style="padding-left: 10px" @click="dialogVisible=true">删除账号</el-button>
                     </div>
 
-                </el-tab-pane>
+                </el-tab-pane><!--
                 <el-tab-pane label="修改密码">
                     <div style="margin-top: 15px; margin-left: 50px; width: 100%;" class="display-row">
                         <div class="filelabel row-left" style="margin-top: 5px;width: 100px;"><p>原始密码:</p></div>
@@ -71,7 +71,7 @@
 
                     <el-button size="mid" type="primary" style="float: right;margin-top: 30px;margin-right: 30px" @click="changePassword">修改密码</el-button>
 
-                </el-tab-pane>
+                </el-tab-pane>-->
             </el-tabs>
 
         <el-dialog
@@ -103,6 +103,7 @@
             return {
                 type:Cookies.get('type'),
                 nickname:Cookies.get('nickname'),
+                nickname1:'',
                 password: '',
                 asset_pw: '',
                 again_pw: '',
@@ -126,9 +127,11 @@
                         alert(res.message);
                         return;
                     }
-                    this.nickname=res[0].nickname;
+                    this.nickname1=res[0].nickname;
                     this.city=res[0].city;
-                    this.phone=res[0].phone;
+                    this.phone=res[0].tel;
+                    Cookies.set('nickname', res[0].nickname);
+                    this.nickname=Cookies.get('nickname');
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
@@ -142,8 +145,8 @@
                 let data={
                     account:Cookies.get('account'),
                     pwd:Cookies.get('pwd'),
-                    nickname:this.nickname,
-                    phone:this.phone,
+                    nickname:this.nickname1,
+                    tel:this.phone,
                     city:this.city,
                 }
 
@@ -152,6 +155,7 @@
                         alert(res.message);
                         return;
                     }
+                    this.getMyMsg();
                     alert(res);
                 }).catch(msg => {
                     if(res.code){
