@@ -46,10 +46,10 @@
                                 路线
                             </div>
                             <div class="tableTitle">
-                                起始时间
+                                行程时间
                             </div>
                             <div class="tableTitle">
-                                结束时间
+                                参加时间
                             </div>
                             <div class="tableTitle" style="width: 80px">
                             </div>
@@ -67,22 +67,38 @@
                                 {{item.route}}
                             </div>
                             <div class="tableCell">
-                                {{item.starttime}}
+                                {{item.starttime}} - {{item.endtime}}
                             </div>
                             <div class="tableCell">
-                                {{item.endtime}}
+                                {{item.jointime}}
                             </div>
                             <div class="tableCell">
-                                <el-button type="primary" size="mini">详情</el-button>
+                                <el-button type="primary" size="mini" @click="toDetail(item)">详情</el-button>
                             </div>
-                            <div class="tableCell">
-                                <el-button type="primary" size="mini">评论</el-button>
+                            <div class="tableCell" v-if="item.content===''">
+                                <el-button type="primary" size="mini" @click="writeTripComment">评论</el-button>
+                            </div>
+                            <div class="tableCell" v-if="item.content!==''">
+                                <el-button type="primary" size="mini">修改评论</el-button>
                             </div>
                         </div>
                     </div>
                 </el-tab-pane>
             </el-tabs>
         </el-card>
+
+        <!--<el-dialog title="评论" :visible.sync="writeTripComment">
+            <el-form :model="form">
+                <el-form-item label="撰写评论（450字以内）">
+                    <el-input type="textarea" v-model="newcontent"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="writeComment = false">取 消</el-button>
+                <el-button v-if="!hasComm" type="primary" @click="submitComment">提交</el-button>
+                <el-button v-if="hasComm" type="primary" @click="changeComment">修改</el-button>
+            </div>
+        </el-dialog>-->
 
         <tra-footer></tra-footer>
     </div>
@@ -102,12 +118,26 @@
                 type:Cookies.get('type'),
                 nickname:Cookies.get('nickname'),
                 activeName: 'first',
+                writeTripComment:false,
                 ticketList:[],
                 tripList:[{
+                    tripid:'1',
                     name:'1111',
+                    route:'xxx-xxxx-xxx',
                     starttime:'112345',
                     endtime:'123455',
-                }],
+                    jointime:'11-1123-11',
+                    content:'',
+                },{
+                    tripid:'1',
+                    name:'1111',
+                    route:'xxx-xxxx-xxx',
+                    starttime:'112345',
+                    endtime:'123455',
+                    jointime:'11-1123-11',
+                    content:'hello',
+                },],
+                newcontent:'',
             }
         },
 
@@ -151,6 +181,10 @@
                     alert(msg)
                 })
             },
+
+            toDetail(item){
+                this.$router.push({path: `/trip/`+item.tripid+`/detail`})
+            }
         },
 
         mounted() {
@@ -175,12 +209,13 @@
         padding: 5px;
         font-family: 黑体;
         font-weight: bold;
-
+        text-align: center;
     }
     .tableCell{
         display: table-cell;
         font-size: 15px;
         padding: 5px;
+        text-align: center;
     }
 
 
