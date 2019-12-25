@@ -24,42 +24,73 @@
                 :visible.sync="centerDialogVisible"
                 width="30%"
                 center>
-<!--            <span slot="footer" class="dialog-footer">-->
-<!--                 用户名：-->
-<!--                <el-input-->
-<!--                 placeholder="请输入手机号或邮箱"-->
-<!--                 v-model="account"-->
-<!--                 clearable-->
-<!--                > </el-input>-->
-<!--                 昵称：-->
-<!--                <el-input-->
-<!--                        placeholder="请输入昵称"-->
-<!--                        v-model="nickname"-->
-<!--                        clearable-->
-<!--                >-->
-<!--                </el-input>-->
-<!--                密码：-->
-<!--                <el-input placeholder="请输入密码" v-model="pwd" show-password></el-input>-->
-<!--                <el-button @click="centerDialogVisible = false">取 消</el-button>-->
-<!--                <el-button type="primary" @click="login">登录</el-button>-->
-<!--                <el-button type="primary" @click="sign">注册</el-button>-->
-<!--            </span>-->
+                <el-dialog
+                    width="30%"
+                    title="注册"
+                    :visible.sync="innerVisible"
+                    center
+                    append-to-body>
                 <el-form :model="form">
-                    <el-form-item label="用户名" :label-width="formLabelWidth">
-                        <el-input placeholder="请输入手机号或邮箱" v-model="account" autocomplete="off"></el-input>
+                    <el-form-item label="账号">
+                        <el-input placeholder="请输入账号" v-model="account" autocomplete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码" :label-width="formLabelWidth">
+                    <el-form-item label="密码" >
                         <el-input placeholder="请输入密码" v-model="pwd" show-password></el-input>
+                    </el-form-item>
+                    <el-form-item label="昵称" >
+                        <el-input placeholder="请输入昵称/名称" v-model="account" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="用户类型" >
+                        <el-radio v-model="userType" label="1">游客</el-radio>
+                        <el-radio v-model="userType" label="2">旅行社</el-radio>
+                        <el-radio v-model="userType" label="3">承包公司</el-radio>
                     </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
-                    <el-button @click="dialogFormVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="login">确 定</el-button>
+                    <el-button @click="innerVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="sign" style="margin-left: 100px">确 定</el-button>
                 </div>
+            </el-dialog>
+                <el-dialog
+                        width="30%"
+                        title="找回密码"
+                        :visible.sync="innerVisible2"
+                        append-to-body
+                        center>
+                    <el-form :model="form">
+                        <el-form-item label="账号">
+                            <el-input placeholder="请输入手机号或邮箱" v-model="account" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button @click="innerVisible2 = false">取 消</el-button>
+                        <el-button type="primary" @click="innerVisible2 = false" style="margin-left: 100px" >确 定</el-button>
+                    </div>
+                </el-dialog>
+                <el-form :model="form">
+                    <el-form-item label="账号" >
+                        <el-input placeholder="请输入账号" v-model="account" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码" >
+                        <el-input placeholder="请输入密码" v-model="pwd" show-password></el-input>
+                    </el-form-item>
+                    <el-form-item label="用户类型" >
+                        <el-radio v-model="userType" label="1">游客</el-radio>
+                        <el-radio v-model="userType" label="2">旅行社</el-radio>
+                        <el-radio v-model="userType" label="3">承包公司</el-radio>
+                    </el-form-item>
+                </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button type="text" @click="innerVisible2 = true">忘记密码</el-button>
+                        <el-button type="text" @click="innerVisible = true" style="margin-left: 150px">注册</el-button><br>
+
+                        <el-button @click="centerDialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="login" style="margin-left: 100px" >确 定</el-button>
+                    </div>
             </el-dialog>
         </div>
 
-        <div v-if="type==='1'" style="float: left;margin-top:-75px;">
+        <div v-if="userType==='1'" style="float: left;margin-top:-75px;">
             <!--<p v-if="type==='1'" style="float: right;margin-right:35px;font-size: 15px;text-align: center">欢迎您！{{this.name}}</p>-->
             <el-menu :default-active="activeIndex"
                      class="el-menu-demo2"
@@ -94,6 +125,7 @@
 <script>
     import API from '../api'
     import Cookies from 'js-cookie'
+    import {AxiosError as res} from "axios";
     export default {
         name: "TraMenu",
 
@@ -112,12 +144,13 @@
 
         data(){
             return{
-                //type:'0',
-                name:"Pika",
+                userType:'0',
                 dialogVisible:false,
                 activeIndex:'',
                 visible:false,
                 centerDialogVisible:false,
+                innerVisible:false,
+                innerVisible2:false,
                 account:'',
                 pwd:'',
             }
@@ -143,12 +176,35 @@
                     pwd: this.pwd,
                     nickname: this.nickname,
                 }
-                API.setAccount(data).then(res => {
-                    alert(res)
-                }).catch(msg => {
-                 console.log(msg)
-                 alert('系统错误，请稍后再试!')
-             })
+                if(this.userType === '1'){
+                    API.setVisitorAccount(data).then(res => {
+                        alert(res)
+                    }).catch(msg => {
+                        console.log(msg)
+                        alert('系统错误，请稍后再试!')
+                    })
+                }
+                if(this.userType === '2'){
+                    API.setAgencyAccount(data).then(res => {
+                        alert(res)
+                    }).catch(msg => {
+                        console.log(msg)
+                        alert('系统错误，请稍后再试!')
+                    })
+                    this.$router.push({path: `/agency`});
+                }
+                if(this.userType === '3'){
+                    API.setCompanyAccount(data).then(res => {
+                        alert(res)
+                    }).catch(msg => {
+                        console.log(msg)
+                        alert('系统错误，请稍后再试!')
+                    })
+                    this.$router.push({path: `/company`});
+                }
+
+                this.innerVisible = false;
+                this.centerDialogVisible = false;
             },
 
             login(){
@@ -157,25 +213,67 @@
                     account: this.account,
                     pwd: this.pwd,
                 }
+                if(this.userType === '1'){
+                    API.isVisitorSuccess(data).then(res => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        Cookies.set('account', this.account);
+                        Cookies.set('pwd', this.pwd);
+                        this.type=1;
+                        Cookies.set('type', this.type);
+                        alert(res);
+                    }).catch(msg => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(msg)
+                    });
+                    this.centerDialogVisible = false;
+                } else if (this.userType === '2'){
+                    API.isAgencySuccess(data).then(res => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        Cookies.set('account', this.account);
+                        Cookies.set('pwd', this.pwd);
+                        this.type='2';
+                        Cookies.set('type', this.type);
+                        alert(res);
+                    }).catch(msg => {
+                        if(res.code){
+                            alert(res.message);
+                            return;
+                        }
+                        alert(msg)
+                    });
+                    this.centerDialogVisible = false;
+                    this.$router.push({path: `/agency`});
+                }else if (this.userType === '3') {
+                    API.isCompanySuccess(data).then(res => {
+                        if (res.code) {
+                            alert(res.message);
+                            return;
+                        }
+                        Cookies.set('account', this.account);
+                        Cookies.set('pwd', this.pwd);
+                        this.type = '3';
+                        Cookies.set('type', this.type);
+                        alert(res);
+                    }).catch(msg => {
+                        if (res.code) {
+                            alert(res.message);
+                            return;
+                        }
+                        alert(msg)
+                    });
+                    this.centerDialogVisible = false;
+                    this.$router.push({path: `/company`});
 
-                API.isSuccess(data).then(res => {
-                    if(res.code){
-                        alert(res.message);
-                        return;
-                    }
-                    Cookies.set('account', this.account);
-                    Cookies.set('pwd', this.pwd);
-                    this.type='1';
-                    Cookies.set('type', this.type);
-                    alert(res);
-                }).catch(msg => {
-                    if(res.code){
-                        alert(res.message);
-                        return;
-                    }
-                    alert(msg)
-                });
-
+                }
                 this.centerDialogVisible = false;
             },
 
