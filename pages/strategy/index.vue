@@ -6,7 +6,15 @@
         </div>
 
         <div>
-            <search></search>
+            <div style="display: flow;width: 100%;margin-top: 20px">
+                <el-input v-model="inputMsg"
+                          placeholder="请输入内容"
+                          prefix-icon="el-icon-search"
+                          class="inputClass"
+                >
+                </el-input>
+                <el-button type="primary"  class="inputButton" @click="searchStrategy">搜索</el-button>
+            </div>
             <el-tabs style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 515px;margin-top: 10px" v-model="activeName">
                 <el-tab-pane label="按时间" name="first">
                     <strategy-list :strategyList="strategyList"></strategy-list>
@@ -40,6 +48,7 @@
                 nickname:Cookies.get('nickname'),
                 strategyList: [],
                 strategyList2: [],
+                inputMsg:[],
             }
         },
 
@@ -87,7 +96,26 @@
                 }else{
                     alert("请先登录");
                 }
-            }
+            },
+
+            searchStrategy(){
+                let data ={
+                    title:this.inputMsg,
+                }
+                API.searchStra(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    this.strategyList=res;
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
+            },
         },
 
         mounted() {
@@ -104,5 +132,15 @@
         width: 100%;
         background: rgba(244, 247, 252, 0.82);
         /*background: -webkit-linear-gradient(bottom,rgb(250,255,235),#fffef3,white) no-repeat;*/
+    }
+
+    .inputClass{
+        float: left;
+        width: 60%;
+        margin-left: 20%;
+    }
+
+    .inputButton{
+        margin-left: 20px;
     }
 </style>

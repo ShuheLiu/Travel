@@ -24,6 +24,7 @@ export default {
     uncollStra:{url:'visitor/cancelcollectstrategy'},//未测v
     newStrategy:{url:'visitor/newstrategy'},//未测v
     like:{url:'visitor/likestrategy'},//undo v
+    searchStra:{url:'index/strategy/search'},
 
     //景区模块接口
     getSceList:{url:'index/scenic/index'},
@@ -34,7 +35,7 @@ export default {
     buySceTicket:{url:'visitor/buyticket'},//未测v
     writeSceState:{url:'visitor/commentscenicstate'},//未测v
     changeSceComment:{url:'visitor/modifysceniccomment'},//未测v
-    searchSce:{url:'index/scenic/searchbykeyword'},//未测v
+    searchSce:{url:'index/scenic/searchbykeyword'},
 
     //旅游线路模块接口
     getTripList:{url:'index/trip/index'},

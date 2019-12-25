@@ -78,7 +78,7 @@
                     }
                     alert(msg)
                 })
-            }
+            },
         },
 
         mounted() {
