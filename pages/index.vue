@@ -226,11 +226,11 @@
   }
 
   .el-carousel__item:nth-child(4n+2) {
-    background-image: url("../assets/image/3.jpg");
+    background-image: url("../assets/image/3.png");
   }
 
   .el-carousel__item:nth-child(4n+3) {
-    background-image: url("../assets/image/4.jpg");
+    background-image: url("../assets/image/4.png");
   }
 
   .scenic{

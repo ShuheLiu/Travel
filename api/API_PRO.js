@@ -19,7 +19,7 @@ export default {
     collStra:{url:'visitor/collectstrategy'},//未测v
     uncollStra:{url:'visitor/collectstrategy'},//未测v
     newStrategy:{url:'visitor/newstrategy'},//未测v
-    like:{},//undo v
+    like:{url:'visitor/likestrategy'},//undo v
 
     //景区模块接口
     getSceList:{url:'index/scenic/index'},
@@ -45,5 +45,7 @@ export default {
     deleteself:{url:'visitor/deleteself'},//未测v
     getMyTicket:{url:'visitor/myticket'},//未测v
     getMyTr:{url:'visitor/mytrip'},//未测v
+    commentTrip:{url:'visitor/commenttrip'},//未测v
+    changeCommentTrip:{url:'visitor/modifytripcomment'},//未测v
 
 }

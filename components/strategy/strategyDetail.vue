@@ -158,7 +158,7 @@
                         alert(res.message);
                         return;
                     }
-                    this.straDetail.like=res;
+                    this.straDetail.like++;
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);
