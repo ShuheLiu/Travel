@@ -27,7 +27,7 @@
         </div>
 
         <div style="margin-top: 40px">
-            <span style="color: #dd6161;float: right;margin-top: 5px;margin-left: 8px">{{this.straDetail.like}}</span>
+            <span style="color: #dd6161;float: right;margin-top: 5px;margin-left: 8px">{{this.straDetail.likenum}}</span>
             <el-button size="small" style="background-color: #dd6161;color: white;float: right;" circle @click="likeStra">赞</el-button>
 
         </div>
@@ -150,6 +150,8 @@
 
             likeStra(){
                 let data ={
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
                     strid : this.strid
                 }
 
@@ -158,7 +160,7 @@
                         alert(res.message);
                         return;
                     }
-                    this.straDetail.like=res;
+                    this.getStrategyDetail();
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);

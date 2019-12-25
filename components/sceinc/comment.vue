@@ -62,14 +62,17 @@
                 let data ={
                     account:Cookies.get('account'),
                     pwd:Cookies.get('pwd'),
-                    sid:this.commentList[0].sid,
+                    sid:this.sid,
                     content:this.form.content,
                 }
+
+                console.log(data)
                 API.writeSceComment(data).then(res => {
                     if(res.code){
                         alert(res.message);
                         return;
                     }
+                    this.setCommentList();
                     alert("提交成功")
                     this.writeComment=false;
                 }).catch(msg => {
@@ -85,7 +88,7 @@
                 let data ={
                     account:Cookies.get('account'),
                     pwd:Cookies.get('pwd'),
-                    sid:this.commentList[0].sid,
+                    sid:this.sid,
                     content:this.form.content,
                 }
                 API.changeSceComment(data).then(res => {
@@ -93,6 +96,7 @@
                         alert(res.message);
                         return;
                     }
+                    this.setCommentList();
                     alert("提交成功")
                     this.writeComment=false;
                 }).catch(msg => {

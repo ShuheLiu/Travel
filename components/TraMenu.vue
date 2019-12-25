@@ -90,7 +90,7 @@
             </el-dialog>
         </div>
 
-        <div v-if="userType==='1'" style="float: left;margin-top:-75px;">
+        <div v-if="type==='1'" style="float: left;margin-top:-75px;margin-left: -60px">
             <!--<p v-if="type==='1'" style="float: right;margin-right:35px;font-size: 15px;text-align: center">欢迎您！{{this.name}}</p>-->
             <el-menu :default-active="activeIndex"
                      class="el-menu-demo2"
@@ -237,6 +237,23 @@
                         Cookies.set('pwd', this.pwd);
                         this.type=1;
                         Cookies.set('type', this.type);
+                        let data2={
+                            account:this.account,
+                            pwd:this.pwd,
+                        }
+                        API.getMyMessage(data2).then(res => {
+                            if(res.code){
+                                alert(res.message);
+                                return;
+                            }
+                            Cookies.set('nickname', res[0].nickname);
+                        }).catch(msg => {
+                            if(res.code){
+                                alert(res.message);
+                                return;
+                            }
+                            alert(msg)
+                        })
                         alert(res);
                     }).catch(msg => {
                         if(res.code){

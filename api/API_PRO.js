@@ -1,8 +1,8 @@
 export default {
 
-    //baseURL: 'http://192.168.43.19:8080/',
+    baseURL: 'http://192.168.43.19:8080/',
 
-    baseURL: 'http://127.0.0.1:8080/',
+    //baseURL: 'http://127.0.0.1:8080/',
     method: 'post',
 
     //登录模块接口
@@ -21,9 +21,9 @@ export default {
     getMyCollStraList:{url:'visitor/mycollection'},//未测v
     collState:{url:'visitor/collectstrategystate'},//未测v
     collStra:{url:'visitor/collectstrategy'},//未测v
-    uncollStra:{url:'visitor/collectstrategy'},//未测v
+    uncollStra:{url:'visitor/cancelcollectstrategy'},//未测v
     newStrategy:{url:'visitor/newstrategy'},//未测v
-    like:{},//undo v
+    like:{url:'visitor/likestrategy'},//undo v
 
     //景区模块接口
     getSceList:{url:'index/scenic/index'},
@@ -34,6 +34,7 @@ export default {
     buySceTicket:{url:'visitor/buyticket'},//未测v
     writeSceState:{url:'visitor/commentscenicstate'},//未测v
     changeSceComment:{url:'visitor/modifysceniccomment'},//未测v
+    searchSce:{url:'index/scenic/searchbykeyword'},//未测v
 
     //旅游线路模块接口
     getTripList:{url:'index/trip/index'},
@@ -50,6 +51,8 @@ export default {
     deleteself:{url:'visitor/deleteself'},//未测v
     getMyTicket:{url:'visitor/myticket'},//未测v
     getMyTr:{url:'visitor/mytrip'},//未测v
+    commentTrip:{url:'visitor/commenttrip'},//未测v
+    changeCommentTrip:{url:'visitor/modifytripcomment'},//未测v
 
     //旅行社
     getAgencyMessage:{},
