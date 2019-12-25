@@ -73,7 +73,7 @@
             <span>确定购买{{this.ticketName}}吗？</span>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="sureBuyingVisible = false">取 消</el-button>
-                <el-button type="primary" @click="buyTicket(ticketName)">确 定</el-button>
+                <el-button type="primary" @click="buyTicket()">确 定</el-button>
             </span>
         </el-dialog>
 
@@ -166,13 +166,13 @@
                 }else{
 
                     this.sureBuyingVisible=true;
-                    this.ticketName=item.tname;
+                    this.ticketName=item.name;
                 }
             },
 
-            buyTicket(tickName){
+            buyTicket(){
                 let data={
-                    tname:tickName,
+                    name:this.ticketName,
                     account:Cookies.get('account'),
                     pwd:Cookies.get('pwd'),
                 };
