@@ -87,7 +87,7 @@
 
         data(){
             return{
-                identity:Cookies.get('identity'),
+                type:Cookies.get('type'),
                 ticketListVisible:false,
                 sureBuyingVisible:false,
                 isShow:false,
@@ -171,14 +171,20 @@
             },
 
             sureBuying(item){
-                this.sureBuyingVisible=true;
-                this.ticketName=item.tname;
+                if(this.type!=='1'){
+                    alert("请先登录")
+                }else{
+
+                    this.sureBuyingVisible=true;
+                    this.ticketName=item.tname;
+                }
             },
 
             buyTicket(tickName){
                 let data={
                     tname:tickName,
-                    identity:this.identity,
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
                 };
 
                 API.buySceTicket(data).then(res => {
@@ -187,7 +193,7 @@
                         return;
                     }
                     alert(res);
-                    sureBuyingVisible=false;
+                    this.sureBuyingVisible=false;
                 }).catch(msg => {
                     if(res.code){
                         alert(res.message);

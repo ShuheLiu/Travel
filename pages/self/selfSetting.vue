@@ -34,7 +34,10 @@
                         </div>
                     </div>
 
-                    <el-button size="mid" type="primary" style="float: right;margin-top: 30px;margin-right: 30px" @click="changeMyMsg">确认修改</el-button>
+                    <div style="float: right;margin-top: 30px;margin-right: 100px;width: 50px">
+                        <el-button size="mid" type="primary" @click="changeMyMsg">确认修改</el-button>
+                        <el-button type="text" style="padding-left: 10px" @click="dialogVisible=true">删除账号</el-button>
+                    </div>
 
                 </el-tab-pane>
                 <el-tab-pane label="修改密码">
@@ -70,6 +73,18 @@
 
                 </el-tab-pane>
             </el-tabs>
+
+        <el-dialog
+                title="重要提示！"
+                :visible.sync="dialogVisible"
+                width="30%">
+            <span>确认后该账号会被彻底注销，您确认吗？</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="deleteMyself">确 定</el-button>
+            </span>
+        </el-dialog>
+
         <tra-footer></tra-footer>
     </div>
 </template>
@@ -95,7 +110,7 @@
                 account:Cookies.get('account'),
                 phone:'',
                 city:'',
-
+                dialogVisible:false,
             }
         },
 
@@ -174,6 +189,28 @@
                         alert(msg)
                     })
                 }
+            },
+
+            deleteMyself(){
+                let data={
+                    account:Cookies.get('account'),
+                    pwd:Cookies.get('pwd'),
+                }
+
+                API.deleteself(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(res);
+                    Cookies.set('type', '0');
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
             }
 
         },

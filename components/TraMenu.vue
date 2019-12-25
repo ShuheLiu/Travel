@@ -17,7 +17,7 @@
             <!--<el-menu-item index="7"><i class="el-icon-user-solid"></i>个人中心</el-menu-item>-->
         </el-menu>
 
-        <div v-if="type==='0'" style="float: right;margin-top:-47px;margin-right:35px;font-size: 15px;text-align: center;">
+        <div v-if="type==='0'" style="float: right;margin-top:-55px;margin-right:35px;font-size: 15px;text-align: center;">
             <el-button type="text" @click="centerDialogVisible = true">登录/注册</el-button>
             <el-dialog
                 title="登录"
@@ -140,6 +140,7 @@
             },
 
             login(){
+
                 let data = {
                     account: this.account,
                     pwd: this.pwd,
@@ -167,6 +168,8 @@
             },
 
             logout(){
+                this.type='0';
+                Cookies.set('type', this.type);
                 this.dialogVisible=false;
                 this.$router.push({path: `/`});
             },
