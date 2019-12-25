@@ -21,7 +21,7 @@ export default {
     getMyCollStraList:{url:'visitor/mycollection'},//未测v
     collState:{url:'visitor/collectstrategystate'},//未测v
     collStra:{url:'visitor/collectstrategy'},//未测v
-    uncollStra:{url:'visitor/collectstrategy'},//未测v
+    uncollStra:{url:'visitor/cancelcollectstrategy'},//未测v
     newStrategy:{url:'visitor/newstrategy'},//未测v
     like:{url:'visitor/likestrategy'},//undo v
 
