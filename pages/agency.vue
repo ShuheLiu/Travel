@@ -298,19 +298,19 @@
                 startDate:'',
                 endDate:'',
             }
-            // API.addTrip(data).then(res => {
-            //     if(res.code){
-            //         alert(res.message);
-            //         return;
-            //     }
-            //     alert(res);
-            // }).catch(msg => {
-            //     if(res.code){
-            //         alert(res.message);
-            //         return;
-            //     }
-            //     alert(msg)
-            // })
+            API.addTrip(data).then(res => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                alert(res);
+            }).catch(msg => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                alert(msg)
+            })
         },
 
     },
