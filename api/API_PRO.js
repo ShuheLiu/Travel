@@ -50,4 +50,10 @@ export default {
     getMyTicket:{url:'visitor/myticket'},//未测v
     getMyTr:{url:'visitor/mytrip'},//未测v
 
+    //旅行社
+    getAgencyMessage:{},
+    changeAgencyMessage:{},
+    changeAgencyPwd:{},
+    deleteAgency:{},
+
 }
