@@ -144,18 +144,7 @@
                 </div>
             </el-dialog>
 
-            <el-tab-pane label="数据中心" >
-                <span style="font-size: 18px; padding: 60px">数据总览</span>
-                <el-card class="box-card">
-                    <div slot="header" class="clearfix">
-                        <span>路线评论数</span>
-                        <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-                    </div>
-                    <div v-for="o in 4" :key="o" class="text item">
-                        {{'列表内容 ' + o }}
-                    </div>
-                </el-card>
-            </el-tab-pane>
+
         </el-tabs>
         <tra-footer style="position:absolute;"></tra-footer>
     </div>

@@ -87,6 +87,40 @@
             </el-dialog>
             <el-tab-pane label="景区管理" ></el-tab-pane>
             <scenic-list :scenicList="scenicList" style="width: 80%;margin-left: 10%;padding-bottom: 20px;min-height: 565px;margin-top: 20px"></scenic-list>
+            <el-form :model="form">
+                <el-form-item label="景区名称" >
+                    <el-input placeholder="请输入景区名称" v-model="scenicName" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="景区介绍" >
+                    <el-input placeholder="请输入景区介绍" v-model="route" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="选择时间" ><br>
+                    <el-time-select
+                            placeholder="起始时间"
+                            v-model="startTime"
+                            :picker-options="{
+      start: '08:30',
+      step: '00:15',
+      end: '18:30'
+    }">
+                    </el-time-select>
+                    <el-time-select
+                            placeholder="结束时间"
+                            v-model="endTime"
+                            :picker-options="{
+      start: '08:30',
+      step: '00:15',
+      end: '18:30',
+      minTime: startTime
+    }">
+                    </el-time-select>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="adddialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="login" style="margin-left: 100px" >确 定</el-button>
+            </div>
+            </el-dialog>
             <el-tab-pane label="数据中心" >
                 <span style="font-size: 18px; padding: 60px">数据总览</span>
                 <el-card class="box-card">
