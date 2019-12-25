@@ -1,6 +1,6 @@
 <template>
     <div>
-        <tra-menu :pageIndex="pageIndex"></tra-menu>
+        <tra-menu :pageIndex="pageIndex" :type="type"></tra-menu>
 
         <el-tabs :tab-position="tabPosition" style="height: 1200px; margin: 20px">
             <el-tab-pane label="信息管理" >           </el-tab-pane>
@@ -199,21 +199,21 @@
                 pwd:Cookies.get('pwd'),
             }
 
-            // API.getAgencyMessage(data).then(res => {
-            //     if(res.code){
-            //         alert(res.message);
-            //         return;
-            //     }
-            //     this.nickname=res[0].nickname;
-            //     this.city=res[0].city;
-            //     this.phone=res[0].phone;
-            // }).catch(msg => {
-            //     if(res.code){
-            //         alert(res.message);
-            //         return;
-            //     }
-            //     alert(msg)
-            // })
+            API.getAgencyMessage(data).then(res => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                this.nickname=res[0].nickname;
+                this.city=res[0].city;
+                this.phone=res[0].phone;
+            }).catch(msg => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                alert(msg)
+            })
         },
 
         changeAgencyMessage(){
@@ -225,19 +225,19 @@
                 city:this.city,
             }
 
-            // API.changeAgencyMessage(data).then(res => {
-            //     if(res.code){
-            //         alert(res.message);
-            //         return;
-            //     }
-            //     alert(res);
-            // }).catch(msg => {
-            //     if(res.code){
-            //         alert(res.message);
-            //         return;
-            //     }
-            //     alert(msg)
-            // })
+            API.changeAgencyMessage(data).then(res => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                alert(res);
+            }).catch(msg => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                alert(msg)
+            })
         },
 
         changeAgencyPwd(){
@@ -253,19 +253,19 @@
                     newpwd:this.asset_pw,
                 }
 
-                // API.changeAgencyPwd(data).then(res => {
-                //     if(res.code){
-                //         alert(res.message);
-                //         return;
-                //     }
-                //     alert(res);
-                // }).catch(msg => {
-                //     if(res.code){
-                //         alert(res.message);
-                //         return;
-                //     }
-                //     alert(msg)
-                // })
+                API.changeAgencyPwd(data).then(res => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(res);
+                }).catch(msg => {
+                    if(res.code){
+                        alert(res.message);
+                        return;
+                    }
+                    alert(msg)
+                })
             }
         },
 
@@ -275,20 +275,20 @@
                 pwd:Cookies.get('pwd'),
             }
 
-            // API.deleteAgency(data).then(res => {
-            //     if(res.code){
-            //         alert(res.message);
-            //         return;
-            //     }
-            //     alert(res);
-            //     Cookies.set('type', '0');
-            // }).catch(msg => {
-            //     if(res.code){
-            //         alert(res.message);
-            //         return;
-            //     }
-            //     alert(msg)
-            // })
+            API.deleteAgency(data).then(res => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                alert(res);
+                Cookies.set('type', '0');
+            }).catch(msg => {
+                if(res.code){
+                    alert(res.message);
+                    return;
+                }
+                alert(msg)
+            })
         },
 
         addTrip(){

@@ -107,7 +107,7 @@
             </el-menu>
         </div>
 
-        <div v-if="userType==='1'" style="float: left;margin-top:-75px;">
+        <div v-if="userType==='2'" style="float: left;margin-top:-75px;">
             <el-menu :default-active="activeIndex"
                      class="el-menu-demo2"
                      mode="horizontal"
